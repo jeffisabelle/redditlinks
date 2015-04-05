@@ -25,4 +25,5 @@ initial_data_backup.json
 newrelic.ini
 *.mo
 log/*
+logs/*
 do.org
