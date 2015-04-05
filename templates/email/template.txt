@@ -1,0 +1,9 @@
+{{ member.email }}
+{% for subreddit, links in data.iteritems %}
+  Here is the links from {{subreddit}}
+
+  {% for link in links %}
+    {{link.title}}
+    {{link.url}}
+  {% endfor %}
+{% endfor %}

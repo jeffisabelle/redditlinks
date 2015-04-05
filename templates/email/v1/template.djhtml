@@ -1,0 +1,12 @@
+<body>
+  <h1>{{ member.email }}</h1>
+  {% for subreddit, links in data.iteritems %}
+    <p>Here is the links from {{subreddit}}</p>
+
+    <ul>
+      {% for link in links %}
+        <li><a href="{{link.url}}">{{link.title}}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</body>

@@ -1,0 +1,22 @@
+{
+    'member': 'user@user.com',
+    'data': {
+        'linux_gaming': {
+            count: 3,
+            links: [
+                '<RedditLink object>',
+                '<RedditLink object>',
+                '<RedditLink object>',
+            ]
+        },
+        'emacs': {
+            count: 4,
+            links: [
+                '<RedditLink object>',
+                '<RedditLink object>',
+                '<RedditLink object>',
+                '<RedditLink object>',
+            ]
+        }
+    }
+}
