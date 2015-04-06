@@ -661,18 +661,15 @@
                                         <span style="font-size:16px;"><a href="{{link.url}}" target="_blank" style="color: #111 !important;">
                                           {{link.title | truncatechars:150 | safe}}
                                         </a></span>
-                                        <ul style="margin: 2px 0; padding: 0;">
-                                          <li class="" style="width: 50px; display: inline-block; line-height:14px;">
+                                        <ul style="margin: 4px 0; padding: 0;">
+                                          <li style="width: 50px; display: inline-block; line-height:14px; margin: 0;">
                                             <img src="http://i.imgur.com/CsKERRo.png" style="width: 12px; vertical-align: top;"/> {{link.score}}
                                           </li>
-                                          <li class="" style="width: 50px; display: inline-block; line-height:14px;">
+                                          <li style="width: 50px; display: inline-block; line-height:14px; margin: 0;">
                                             <a href="{{link.comments_permalink}}" style="color: #666 !important; text-decoration: none;" target="_blank">
                                               <img src="http://i.imgur.com/sS7Vjx8.png" style="width: 12px; vertical-align: top;"/> {{link.comments_count}}
                                             </a>
                                           </li>
-                                          <!-- <li class="" style="display: inline-block; line-height:14px;"> -->
-                                          <!--   <img src="http://i.imgur.com/zQsSMzP.png" style="width: 12px; vertical-align: top;"/> {{link.author}} -->
-                                          <!-- </li> -->
                                         </ul>
                                         <br />
                                       {% endfor %}
