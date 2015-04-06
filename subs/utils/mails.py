@@ -48,17 +48,17 @@ class MailCore():
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
 
-        f = codecs.open('hede.html', 'w+', 'utf-8')
-        f.write(html_content)
-        f.close()
+        # f = codecs.open('hede.html', 'w+', 'utf-8')
+        # f.write(html_content)
+        # f.close()
 
-        # send_mail(
-        #     'Top Reddit Links',
-        #     text_content,
-        #     'Reddit.cool <no-reply@reddit.cool>',
-        #     [ctx['member'].email],
-        #     html_message=html_content,
-        # )
+        send_mail(
+            'Top Reddit Links',
+            text_content,
+            'Reddit.cool <no-reply@reddit.cool>',
+            [ctx['member'].email],
+            html_message=html_content,
+        )
 
         # print ctx
 

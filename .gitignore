@@ -27,3 +27,4 @@ newrelic.ini
 log/*
 logs/*
 do.org
+fabfile.py
