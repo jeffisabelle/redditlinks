@@ -2,13 +2,19 @@ from django.db import models
 
 
 class Member(models.Model):
+    RATE_CHOICES = (
+        ('d', 'Daily'),
+        ('w', 'Weekly'),
+    )
+
     email = models.EmailField()
     total_subscription = models.IntegerField(default=0)
     subscription = models.ManyToManyField(
         "Subscription",
-        through="members.MemberSubscription"
-    )
+        through="members.MemberSubscription")
     is_active = models.NullBooleanField(default=False, null=True)
+    rate = models.CharField(max_length=1, default='d',
+                            choices=RATE_CHOICES, null=True)
 
     def get_subscriptions(self):
         return self.subscription.all()
