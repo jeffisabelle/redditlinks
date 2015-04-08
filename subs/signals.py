@@ -49,7 +49,7 @@ def send_daily_mails(sender, **kwargs):
                 subreddit__title=title, **qs_filter)[:limit]
             ctx['data'][title] = links
 
-        mail_utils.process(ctx)
+        mail_utils.process(ctx, rate)
         print 'sending mail - %s' % member
 
     print "emails sent"

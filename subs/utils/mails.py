@@ -15,7 +15,6 @@ from members.models import Member
 from subs.models import Subreddit, RedditLink
 from django.template import Context
 from datetime import date
-import codecs
 
 
 class MailCore():
@@ -42,25 +41,24 @@ class MailCore():
 
         return ctx
 
-    def process(self, ctx):
+    def process(self, ctx, rate):
         context = Context(ctx)
 
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
 
-        # f = codecs.open('hede.html', 'w+', 'utf-8')
-        # f.write(html_content)
-        # f.close()
+        if rate == 'w':
+            title = 'Weekly Reddit Links'
+        else:
+            title = 'Top Reddit Links (Daily)'
 
         send_mail(
-            'Top Reddit Links',
+            title,
             text_content,
             'Reddit.cool <no-reply@reddit.cool>',
             [ctx['member'].email],
             html_message=html_content,
         )
-
-        # print ctx
 
 
 if __name__ == '__main__':
