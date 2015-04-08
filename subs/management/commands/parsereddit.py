@@ -8,7 +8,7 @@ import pprint
 import time
 
 from subs.models import Subreddit, RedditLink
-from subs.signals import parsing_done
+from subs.signals import send_mails
 
 
 class Command(BaseCommand):
@@ -24,8 +24,7 @@ class Command(BaseCommand):
     def _create_parse_url(self, subreddit):
         return "%s%s%s%s" % (self.BASE, subreddit, self.LIST, self.FORMAT)
 
-    def handle(self, *args, **options):
-
+    def _parse_links(self):
         subs = Subreddit.objects.all()
         for subreddit in subs:
             print subreddit.title
@@ -62,4 +61,10 @@ class Command(BaseCommand):
 
             time.sleep(1)
 
-        parsing_done.send(sender=self.__class__)
+    def handle(self, *args, **options):
+        rate = 'daily' if len(args) == 0 else args[0]
+        if rate == 'daily':
+            self._parse_links()
+            send_mails.send(sender=self.__class__, rate='d')
+        else:
+            send_mails.send(sender=self.__class__, rate='w')
