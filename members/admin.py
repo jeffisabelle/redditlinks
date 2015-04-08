@@ -12,7 +12,7 @@ class MemberSubscriptionAdmin(admin.ModelAdmin):
 
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ('email', 'is_active', 'total_subscription')
+    list_display = ('email', 'rate', 'is_active', 'total_subscription')
 
 admin.site.register(Member, MemberAdmin)
 admin.site.register(Subscription, SubscriptionAdmin)

@@ -2,20 +2,39 @@ from django.dispatch import Signal, receiver
 
 from members.models import Member
 from subs.utils.mails import MailCore
-from subs.models import Subreddit, RedditLink
+from subs.models import RedditLink
 
-from datetime import date
+from datetime import date, timedelta
 
-parsing_done = Signal()
+send_mails = Signal()
 
 
-@receiver(parsing_done)
-def parsing_done_callback(sender, **kwargs):
-    print "starting to sending emails"
-    mail_utils = MailCore()
+def get_qs_filter(rate):
     today = date.today()
+    last_week = today - timedelta(days=7)
 
-    members = Member.objects.filter(is_active=True)
+    if rate == 'd':
+        qs_filter = {
+            'parsed_at__year': today.year,
+            'parsed_at__month': today.month,
+            'parsed_at__day': today.day
+        }
+        return qs_filter
+
+    qs_filter = {'parsed_at__range': [last_week, today]}
+    return qs_filter
+
+
+@receiver(send_mails)
+def send_daily_mails(sender, **kwargs):
+    print "starting to sending emails"
+
+    rate = kwargs['rate']
+    qs_filter = get_qs_filter(rate)
+
+    mail_utils = MailCore()
+
+    members = Member.objects.filter(is_active=True, rate=rate)
     for member in members:
         ctx = dict()
         ctx['member'] = member
@@ -24,16 +43,13 @@ def parsing_done_callback(sender, **kwargs):
         subscriptions = member.get_subscriptions()
         for subscription in subscriptions:
             limit = subscription.count
-            subreddit = Subreddit.objects.get(title=subscription.subreddit)
+            title = subscription.subreddit
 
             links = RedditLink.objects.filter(
-                subreddit=subreddit, parsed_at__year=today.year,
-                parsed_at__month=today.month, parsed_at__day=today.day)[:limit]
-            ctx['data'][subreddit] = links
+                subreddit__title=title, **qs_filter)[:limit]
+            ctx['data'][title] = links
 
-        mail_utils.process(ctx)
+        mail_utils.process(ctx, rate)
         print 'sending mail - %s' % member
-    print "emails sent"
 
-if __name__ == '__main__':
-    parsing_done.send(sender=None)
+    print "emails sent"
