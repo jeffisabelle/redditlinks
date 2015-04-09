@@ -48,7 +48,7 @@ class MailCore():
         text_content = render_to_string('email/template.txt', context)
 
         if rate == 'w':
-            title = 'Weekly Reddit Links'
+            title = 'Top Reddit Links (Weekly)'
         else:
             title = 'Top Reddit Links (Daily)'
 
