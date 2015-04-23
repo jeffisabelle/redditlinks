@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     # apps
     'members',
     'subs',
+    'libs',
 )
 
 MIDDLEWARE_CLASSES = (
