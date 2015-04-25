@@ -1,4 +1,5 @@
 from django.db import models
+from subs.managers import DailyLinks, WeeklyLinks
 
 
 class RedditLink(models.Model):
@@ -11,6 +12,10 @@ class RedditLink(models.Model):
     subreddit = models.ForeignKey('Subreddit')
     author = models.CharField(max_length=200, null=True)
     parsed_at = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
+    daily_links = DailyLinks()
+    weekly_links = WeeklyLinks()
 
     class Meta:
         ordering = ['-score']
