@@ -7,14 +7,22 @@ class Member(models.Model):
         ('w', 'Weekly'),
     )
 
+    TYPE_CHOICES = (
+        ('freemium', 'Freemium'),
+        ('premium', 'Premium'),
+        ('special', 'Special'),
+    )
+
     email = models.EmailField()
     total_subscription = models.IntegerField(default=0)
     subscription = models.ManyToManyField(
-        "Subscription",
-        through="members.MemberSubscription")
+        "Subscription", through="members.MemberSubscription")
     is_active = models.NullBooleanField(default=False, null=True)
-    rate = models.CharField(max_length=1, default='d',
-                            choices=RATE_CHOICES, null=True)
+    rate = models.CharField(max_length=1, default='d', null=True,
+                            choices=RATE_CHOICES)
+    timezone = models.CharField(null=True, blank=True, max_length=50)
+    subscription_type = models.CharField(
+        default='freemium', max_length=10, choices=TYPE_CHOICES)
 
     def get_subscriptions(self):
         return self.subscription.all()
