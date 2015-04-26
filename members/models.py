@@ -1,4 +1,5 @@
 from django.db import models
+import pytz
 
 
 class Member(models.Model):
@@ -13,6 +14,8 @@ class Member(models.Model):
         ('special', 'Special'),
     )
 
+    ZONE_CHOICES = tuple([(zone, zone) for zone in pytz.all_timezones])
+
     email = models.EmailField()
     total_subscription = models.IntegerField(default=0)
     subscription = models.ManyToManyField(
@@ -20,7 +23,8 @@ class Member(models.Model):
     is_active = models.NullBooleanField(default=False, null=True)
     rate = models.CharField(max_length=1, default='d', null=True,
                             choices=RATE_CHOICES)
-    timezone = models.CharField(null=True, blank=True, max_length=50)
+    timezone = models.CharField(null=True, blank=True, max_length=50,
+                                choices=ZONE_CHOICES)
     subscription_type = models.CharField(
         default='freemium', max_length=10, choices=TYPE_CHOICES)
 
