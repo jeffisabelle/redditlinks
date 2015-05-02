@@ -23,8 +23,9 @@ class MailLib(object):
             ctx['data'][title] = links
         return ctx
 
-    def process(self, member, rate):
+    def process(self, member):
         ctx = self.build_context(member)
+        rate = member.rate
         context = Context(ctx)
 
         html_content = render_to_string('email/template.html', context)
