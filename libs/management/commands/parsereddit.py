@@ -58,12 +58,9 @@ class Command(BaseCommand):
                 except IntegrityError:
                     print traceback.format_exc()
 
-            time.sleep(1)
+            time.sleep(2)
 
     def handle(self, *args, **options):
         rate = 'daily' if len(args) == 0 else args[0]
         if rate == 'daily':
             self._parse_links()
-            # send_mails.send(sender=self.__class__, rate='d')
-        # else:
-            # send_mails.send(sender=self.__class__, rate='w')
