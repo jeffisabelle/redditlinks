@@ -1,4 +1,3 @@
-import random
 from datetime import datetime
 
 import pytz
@@ -7,9 +6,7 @@ from django.core.management import call_command
 from StringIO import StringIO
 
 from libs import timelib
-from libs.tests.helpers import create_redditlink, create_member
 from libs.tests.helpers import create_members_different_timezones
-from subs.models import RedditLink
 from members.models import Member
 
 
