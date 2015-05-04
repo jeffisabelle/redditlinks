@@ -4,11 +4,10 @@ from django.db.utils import IntegrityError
 import traceback
 import requests
 import json
-import pprint
 import time
 
 from subs.models import Subreddit, RedditLink
-from subs.signals import send_mails
+# from subs.signals import send_mails
 
 
 class Command(BaseCommand):
@@ -19,7 +18,7 @@ class Command(BaseCommand):
     LIST = "/top/"
     FORMAT = ".json"
     AGENT = "User-Agent: redditlinks:v0.1 (by /u/jeffisabelle)"
-    PP = pprint.PrettyPrinter(indent=4)
+    # PP = pprint.PrettyPrinter(indent=4)
 
     def _create_parse_url(self, subreddit):
         return "%s%s%s%s" % (self.BASE, subreddit, self.LIST, self.FORMAT)
@@ -59,12 +58,9 @@ class Command(BaseCommand):
                 except IntegrityError:
                     print traceback.format_exc()
 
-            time.sleep(1)
+            time.sleep(2)
 
     def handle(self, *args, **options):
         rate = 'daily' if len(args) == 0 else args[0]
         if rate == 'daily':
             self._parse_links()
-            send_mails.send(sender=self.__class__, rate='d')
-        else:
-            send_mails.send(sender=self.__class__, rate='w')

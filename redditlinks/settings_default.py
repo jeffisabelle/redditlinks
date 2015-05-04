@@ -39,10 +39,12 @@ INSTALLED_APPS = (
 
     # 3rd-parties
     'djrill',
+    'django_nose',
 
     # apps
     'members',
     'subs',
+    'libs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,3 +117,6 @@ TEMPLATE_DIRS = (
 # EMAIL MANDRILL BACKEND
 MANDRILL_API_KEY = "mandrill-key"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+
+# Integrate with nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
