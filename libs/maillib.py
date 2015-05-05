@@ -34,13 +34,13 @@ class MailLib(object):
         title = 'Top Reddit Links (Weekly)'
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
-        self.sendmail(title, text_content, html_content, member.email)
+        self.sendmail(title, text_content, html_content, [member.email])
 
     def send_daily_mail(self, context, member):
         title = 'Top Reddit Links (Daily)'
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
-        self.sendmail(title, text_content, html_content, member.email)
+        self.sendmail(title, text_content, html_content, [member.email])
 
     def process(self, member):
         ctx = self.build_context(member)
@@ -48,6 +48,6 @@ class MailLib(object):
         rate = member.rate
 
         if rate == 'w':
-            self.send_weekly_mail(self, context, member)
+            self.send_weekly_mail(context, member)
         else:
-            self.send_daily_mail(self, context, member)
+            self.send_daily_mail(context, member)
