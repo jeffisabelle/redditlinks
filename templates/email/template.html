@@ -550,45 +550,6 @@
             <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer">
               <tr>
                 <td align="center" valign="top">
-                  <!-- BEGIN PREHEADER // -->
-                  <table border="0" cellpadding="0" cellspacing="0" width="600" id="templatePreheader">
-                    <tr>
-                      <td valign="top" class="preheaderContainer" style="padding-top:9px;"><table class="mcnTextBlock" border="0" cellpadding="0" cellspacing="0" width="100%">
-                        <tbody class="mcnTextBlockOuter">
-                          <tr>
-                            <td class="mcnTextBlockInner" valign="top">
-
-                              <table class="mcnTextContentContainer" align="left" border="0" cellpadding="0" cellspacing="0" width="366">
-                                <tbody><tr>
-
-                                  <td class="mcnTextContent" style="padding-top:9px; padding-left:18px; padding-bottom:9px; padding-right:0;" valign="top">
-
-                                    Use this area to offer a short preview of your email's content.
-                                  </td>
-                                </tr>
-                                </tbody></table>
-
-                              <table class="mcnTextContentContainer" align="right" border="0" cellpadding="0" cellspacing="0" width="197">
-                                <tbody><tr>
-
-                                  <td class="mcnTextContent" style="padding-top:9px; padding-right:18px; padding-bottom:9px; padding-left:0;" valign="top">
-
-                                    <a href="*|ARCHIVE|*" target="_blank">View this email in your browser</a>
-                                  </td>
-                                </tr>
-                                </tbody></table>
-
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table></td>
-                    </tr>
-                  </table>
-                  <!-- // END PREHEADER -->
-                </td>
-              </tr>
-              <tr>
-                <td align="center" valign="top">
                   <!-- BEGIN HEADER // -->
                   <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateHeader">
                     <tr>
@@ -601,8 +562,7 @@
                                   <td class="mcnImageContent" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0;" valign="top">
 
 
-                                    <img alt="" src="https://gallery.mailchimp.com/555e729ed407c4a6fcbbc37a2/images/cee1d64d-175e-4eef-8871-a4b604b7304e.png" style="max-width:565px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage" align="left" width="564">
-
+                                    <img alt="" src="http://i.imgur.com/lJ2qBpj.jpg" style="max-width:565px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage" align="left" width="564">
 
                                   </td>
                                 </tr>
@@ -631,11 +591,12 @@
 
                                   <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
 
-                                    <h1>Top Reddit Links</h1>
+                                    <h2 style="text-align: center;">your newsletter for reddit</h2>
 
-                                    <h3>From your favourite subreddits</h3>
-
-                                    <hr>This is a newsletter that send you top reddit links from your favourite subreddits everyday. You have subscribed our newsletter using reddit.cool and we are really happy about it. If you haven't subscribed, or don't want to receive more emails, you can find the unsubscribe link at the end of this email.
+                                    <hr>
+                                    <p style="text-align: center;">
+                                      This is a newsletter that send you top reddit links from your favourite subreddits everyday. You have subscribed our newsletter using reddit.cool and we are really happy about it. If you haven't subscribed, or don't want to receive more emails, you can find the unsubscribe link at the end of this email.
+                                    </p>
                                   </td>
                                 </tr>
                                 </tbody></table>
@@ -672,6 +633,11 @@
                                           </li>
                                         </ul>
                                         <br />
+                                      {% empty %}
+                                        <span style="font-size:16px;">
+                                          no links could have been parsed for this subreddit. :(
+                                        </span>
+                                        <br/><br/>
                                       {% endfor %}
 
                                     {% endfor %}
