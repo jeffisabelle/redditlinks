@@ -616,7 +616,7 @@
                                     {% for subreddit, links in data.iteritems %}
                                       <br/>
                                       <span style="font-size:24px"><strong><span style="color: #FF5A1D;">{{subreddit}}</span></strong></span>
-                                      <hr>
+                                      <hr style="border:0; border-bottom: 1px dashed #ccc; background:#999;">
 
                                       {% for link in links %}
                                         <span style="font-size:16px;"><a href="{{link.url}}" target="_blank" style="color: #111 !important;">
