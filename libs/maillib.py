@@ -28,10 +28,17 @@ class MailLib(object):
             ctx['data'][title] = links
         return ctx
 
+    def minify(self, html_content):
+        html_content = html_content.replace('  ', '')
+        html_content = html_content.replace('\n', '')
+        return html_content
+
     def sendmail(self, title, text_content, html_content, to):
-        send_mail(title, text_content,
-                  'Reddit.cool <no-reply@reddit.cool>',
-                  to, html_message=html_content)
+        from_mail = 'Reddit.cool <no-reply@reddit.cool>'
+        html_content = self.minify(html_content)
+
+        send_mail(title, text_content, from_mail, to,
+                  html_message=html_content)
 
     def send_weekly_mail(self, context, member):
         if datetime.now(pytz.utc).isoweekday != 1:
