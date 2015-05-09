@@ -1,3 +1,6 @@
+import pytz
+from datetime import datetime
+
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -31,6 +34,10 @@ class MailLib(object):
                   to, html_message=html_content)
 
     def send_weekly_mail(self, context, member):
+        if datetime.now(pytz.utc).isoweekday != 1:
+            """only send weekly mails at mondays, return otherwise"""
+            return
+
         title = 'Top Reddit Links (Weekly)'
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
