@@ -41,7 +41,7 @@ class MailLib(object):
                   html_message=html_content)
 
     def send_weekly_mail(self, context, member):
-        if datetime.now(pytz.utc).isoweekday != 1:
+        if datetime.now(pytz.utc).isoweekday() != 2:
             """only send weekly mails at mondays, return otherwise"""
             return
 
