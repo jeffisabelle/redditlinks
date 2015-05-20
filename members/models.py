@@ -34,6 +34,9 @@ class Member(models.Model):
     def __unicode__(self):
         return self.email
 
+    class Meta:
+        app_label = 'members'
+
 
 class Subscription(models.Model):
     subreddit = models.CharField(max_length=200)
@@ -44,6 +47,7 @@ class Subscription(models.Model):
 
     class Meta:
         unique_together = (("subreddit", "count"),)
+        app_label = 'members'
 
 
 class MemberSubscription(models.Model):
@@ -52,3 +56,6 @@ class MemberSubscription(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.subscription.subreddit, self.member.email)
+
+    class Meta:
+        app_label = 'members'
