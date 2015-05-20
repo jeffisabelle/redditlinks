@@ -16,6 +16,10 @@ def start_gunicorn():
     run('service gunicorn start')
 
 
+def install_dependencies():
+    run('pip install -r requirements.txt')
+
+
 def migrate():
     run('python manage.py migrate')
 
@@ -25,5 +29,6 @@ def release():
         stop_gunicorn()
         run('git fetch')
         run('git pull -u origin master')
+        install_dependencies()
         migrate()
         start_gunicorn()
