@@ -2,8 +2,6 @@ from datetime import datetime
 
 import pytz
 from django.test import TestCase
-from django.core.management import call_command
-from StringIO import StringIO
 
 from libs import timelib
 from libs.tests.helpers import create_members_different_timezones
@@ -21,12 +19,6 @@ class TestMaillib(TestCase):
                  u'Europe/Istanbul',
                  u'America/New_York']
         create_members_different_timezones(zones)
-
-    def test_sendmail_command(self):
-        out = StringIO()
-        call_command('sendmails', stdout=out)
-        self.assertIn('mails-sent', out.getvalue())
-        self.assertIsNotNone(out.getvalue())
 
     def test_member_morning_timezones(self):
         zones = Member.objects.all().values('timezone').distinct()
