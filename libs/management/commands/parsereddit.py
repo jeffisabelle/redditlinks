@@ -7,7 +7,6 @@ import json
 import time
 
 from subs.models import Subreddit, RedditLink
-# from subs.signals import send_mails
 
 
 class Command(BaseCommand):
