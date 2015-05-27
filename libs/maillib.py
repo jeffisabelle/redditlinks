@@ -51,7 +51,8 @@ class MailLib(object):
         self.sendmail(title, text_content, html_content, [member.email])
 
     def send_daily_mail(self, context, member):
-        title = 'Top Reddit Links (Daily)'
+        today = datetime.now().strftime('%d/%m/%Y')
+        title = '(Daily) Top Reddit Links (%s)' % today
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
