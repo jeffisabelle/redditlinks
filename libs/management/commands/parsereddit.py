@@ -5,8 +5,11 @@ import traceback
 import requests
 import json
 import time
+import logging
 
 from subs.models import Subreddit, RedditLink
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -26,6 +29,7 @@ class Command(BaseCommand):
         for subreddit in subs:
             print subreddit.title
             try:
+                logger.debug('Parsing Started.')
                 headers = {'User-Agent': self.AGENT}
                 url = self._create_parse_url(subreddit)
 
@@ -51,10 +55,15 @@ class Command(BaseCommand):
                             obj.comments_count = item['num_comments']
                             obj.score = item["score"]
                         obj.save()
-                    except IntegrityError:
+                    except IntegrityError as e:
+                        logger.error(
+                            'Error While Saving Parsed Links: %s - %s',
+                            subreddit.title, e)
                         print traceback.format_exc()
                 time.sleep(2)
-            except Exception:
+            except Exception as e:
+                logger.error('Error While Iterating for Parsing: %s', e)
+                # todo, check rate-limits
                 pass
 
     def handle(self, *args, **options):
