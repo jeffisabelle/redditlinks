@@ -1,11 +1,12 @@
-from django.core.management.base import BaseCommand
-from django.db.utils import IntegrityError
-
 import traceback
 import requests
 import json
 import time
 import logging
+
+from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
+from django.utils import timezone
 
 from subs.models import Subreddit, RedditLink
 
@@ -26,6 +27,7 @@ class Command(BaseCommand):
 
     def _parse_links(self):
         subs = Subreddit.objects.all()
+        parsed_at = timezone.now()
         for subreddit in subs:
             print subreddit.title
             try:
@@ -54,6 +56,8 @@ class Command(BaseCommand):
                         else:
                             obj.comments_count = item['num_comments']
                             obj.score = item["score"]
+
+                        obj.parsed_at = parsed_at
                         obj.save()
                     except IntegrityError as e:
                         logger.error(
