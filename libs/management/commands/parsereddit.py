@@ -29,7 +29,7 @@ class Command(BaseCommand):
         for subreddit in subs:
             print subreddit.title
             try:
-                logger.debug('Parsing Started.')
+                logger.debug('Parsing Now: [%s]', subreddit.title)
                 headers = {'User-Agent': self.AGENT}
                 url = self._create_parse_url(subreddit)
 
