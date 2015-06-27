@@ -120,3 +120,5 @@ EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 # Integrate with nose
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+HOST = "http://reddit.cool/"
