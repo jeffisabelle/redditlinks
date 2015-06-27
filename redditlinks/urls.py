@@ -10,5 +10,6 @@ url(r'^blog/', include('blog.urls')),
 
 urlpatterns = patterns(
     '', url(r'^admin/', include(admin.site.urls)),
+    url('^members/', include('members.urls')),
     url('^example-mail/', ExampleMail.as_view(), name='examplemail'),
 )
