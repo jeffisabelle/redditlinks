@@ -1,0 +1,16 @@
+.header {
+    /* background-color: $white; */
+    /* border-bottom: 7px solid #eee; */
+    background-color: #eee;
+    border-bottom: 7px solid $white;
+
+    margin-bottom: 30px;
+
+    .logo-wrapper {
+        /* text-align: center; */
+        img.logo {
+            height: 120px;
+            margin: 30px auto;
+        }
+    }
+}
