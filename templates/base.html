@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    {% block "title" %}
+      <title>Reddit.cool</title>
+    {% endblock %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}static/images/favicon.png">
+
+  </head>
+  <body>
+    <div id="content">
+      {% include "base_components/header.html" %}
+      {% block "content" %} {% endblock %}
+    </div> <!-- end of content -->
+    {% include "base_components/footer.html" %}
+
+
+    {% block "jsimports" %}
+    <!-- include javascripts -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+    <!-- End Document -->
+  </body>
+</html>
