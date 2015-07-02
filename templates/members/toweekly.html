@@ -3,9 +3,21 @@
 {% block "content" %}
   <div class="container">
     <div class="row">
-      <div class="col-xs-6">
-        hello there <br/>
-        {{member.email}}
+      <div class="col-md-6">
+
+        <div class="card">
+          hello there <br/>
+          {{member.email}}
+          <br/><br/>
+          we have moved your subscription rate to weekly rate.
+          <br/><br/>
+
+          uh oh! if you clicked that button accidentally
+          you can move back to
+          <a href="{{host}}members/todaily?member={{member.member_uuid}}&token={{member.member_token}}">
+            daily subscription.</a>
+        </div>
+
       </div> <!-- /col-xs-6 -->
     </div> <!-- /row -->
 
