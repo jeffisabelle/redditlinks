@@ -29,17 +29,12 @@ html a, body a {
 .header {
   /* background-color: $white; */
   /* border-bottom: 7px solid #eee; */
-  background-color: #eee;
+  /* background-color: #eee; */
   border-bottom: 7px solid #FDFDFD;
   margin-bottom: 30px;
 }
-/* line 9, ../sass/components/_header.scss */
-.header .logo-wrapper {
-  /* text-align: center; */
-}
-/* line 11, ../sass/components/_header.scss */
+/* line 10, ../sass/components/_header.scss */
 .header .logo-wrapper img.logo {
-  height: 120px;
   margin: 30px auto;
 }
 
@@ -58,4 +53,10 @@ html a, body a {
   font-size: 13px;
   font-weight: 700;
   color: #0A0A0A;
+}
+
+/* line 1, ../sass/components/_cards.scss */
+.card {
+  padding: 30px 40px;
+  border-left: 7px solid #525252;
 }
