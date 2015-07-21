@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 import pytz
 
@@ -17,6 +19,8 @@ class Member(models.Model):
     ZONE_CHOICES = tuple([(zone, zone) for zone in pytz.all_timezones])
 
     email = models.EmailField()
+    member_uuid = models.UUIDField(default=uuid.uuid4, editable=True)
+    member_token = models.UUIDField(default=uuid.uuid4, editable=True)
     total_subscription = models.IntegerField(default=0)
     subscription = models.ManyToManyField(
         "Subscription", through="members.MemberSubscription")

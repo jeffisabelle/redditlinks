@@ -91,7 +91,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
 STATIC_URL = '/static/'
 
 TEMPLATE_LOADERS = (
@@ -107,6 +106,9 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 LOGGING = {
     'version': 1,
@@ -159,3 +161,5 @@ EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 # Integrate with nose
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+HOST = "http://reddit.cool/"

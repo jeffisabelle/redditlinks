@@ -47,14 +47,14 @@ class MailLib(object):
 
         today = datetime.now().strftime('%d %b %Y')
         title = 'Weekly Reddit Links - %s' % today
-        html_content = render_to_string('email/template.html', context)
+        html_content = render_to_string('email/weekly.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 
     def send_daily_mail(self, context, member):
         today = datetime.now().strftime('%d %b %Y')
         title = 'Daily Reddit Links - %s' % today
-        html_content = render_to_string('email/template.html', context)
+        html_content = render_to_string('email/daily.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 

@@ -1,6 +1,11 @@
+from django.conf import settings
 from django.views.generic.base import TemplateView
 from subs.models import RedditLink
 from members.models import Member
+
+
+class Homepage(TemplateView):
+    template_name = "home.html"
 
 
 class ExampleMail(TemplateView):
@@ -12,6 +17,7 @@ class ExampleMail(TemplateView):
         member = Member.objects.get(email='muhitosan@gmail.com')
         context['member'] = member
         context['data'] = {}
+        context['host'] = settings.HOST
 
         subscriptions = member.get_subscriptions()
         for subscription in subscriptions:

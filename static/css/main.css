@@ -1,0 +1,70 @@
+/* $primary-color-half-dark: #484848; */
+/* $primary-color-full-dark: #3D3D3D; */
+/* $secondary-color: #FFD503; */
+/* $tertiary-color: #E85151; */
+/* font-sizes */
+/* line 1, ../sass/components/_core.scss */
+html, body {
+  height: 100%;
+  min-height: 100%;
+  /* background-color: $base-background-color; */
+  background-color: #FDFDFD;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #010101;
+}
+/* line 11, ../sass/components/_core.scss */
+html #content, body #content {
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 100px;
+}
+/* line 17, ../sass/components/_core.scss */
+html a, body a {
+  color: #FF4500;
+}
+/* line 19, ../sass/components/_core.scss */
+html a:hover, body a:hover {
+  color: #FF4500;
+}
+/* line 22, ../sass/components/_core.scss */
+html .primary-color, body .primary-color {
+  color: #FF4500;
+}
+
+/* line 1, ../sass/components/_header.scss */
+.header {
+  /* background-color: $white; */
+  /* border-bottom: 7px solid #eee; */
+  /* background-color: #eee; */
+  border-bottom: 7px solid #FDFDFD;
+  margin-bottom: 30px;
+}
+/* line 10, ../sass/components/_header.scss */
+.header .logo-wrapper img.logo {
+  margin: 30px auto;
+}
+
+/* line 1, ../sass/components/_footer.scss */
+.footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: 100px;
+  margin-top: -100px;
+  padding-top: 30px;
+  /* background-color: $white; */
+  /* border-top: 10px solid #eee; */
+  background-color: #eee;
+  border-top: 10px solid #FDFDFD;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0A0A0A;
+}
+
+/* line 1, ../sass/components/_cards.scss */
+.card {
+  padding: 30px 40px;
+  border-left: 7px solid #525252;
+}
