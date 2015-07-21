@@ -9,7 +9,7 @@ class Homepage(TemplateView):
 
 
 class ExampleMail(TemplateView):
-    template_name = "email/template.html"
+    template_name = "email/weekly.html"
 
     def get_context_data(self, **kwargs):
         context = super(ExampleMail, self).get_context_data(**kwargs)
