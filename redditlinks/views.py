@@ -4,6 +4,10 @@ from subs.models import RedditLink
 from members.models import Member
 
 
+class Homepage(TemplateView):
+    template_name = "home.html"
+
+
 class ExampleMail(TemplateView):
     template_name = "email/template.html"
 
