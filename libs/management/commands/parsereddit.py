@@ -1,12 +1,16 @@
-from django.core.management.base import BaseCommand
-from django.db.utils import IntegrityError
-
 import traceback
 import requests
 import json
 import time
+import logging
+
+from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
+from django.utils import timezone
 
 from subs.models import Subreddit, RedditLink
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -23,9 +27,11 @@ class Command(BaseCommand):
 
     def _parse_links(self):
         subs = Subreddit.objects.all()
+        parsed_at = timezone.now()
         for subreddit in subs:
             print subreddit.title
             try:
+                logger.debug('Parsing Now: [%s]', subreddit.title)
                 headers = {'User-Agent': self.AGENT}
                 url = self._create_parse_url(subreddit)
 
@@ -50,11 +56,18 @@ class Command(BaseCommand):
                         else:
                             obj.comments_count = item['num_comments']
                             obj.score = item["score"]
+
+                        obj.parsed_at = parsed_at
                         obj.save()
-                    except IntegrityError:
+                    except IntegrityError as e:
+                        logger.error(
+                            'Error While Saving Parsed Links: %s - %s',
+                            subreddit.title, e)
                         print traceback.format_exc()
                 time.sleep(2)
-            except Exception:
+            except Exception as e:
+                logger.error('Error While Iterating for Parsing: %s', e)
+                # todo, check rate-limits
                 pass
 
     def handle(self, *args, **options):

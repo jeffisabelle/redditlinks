@@ -41,17 +41,19 @@ class MailLib(object):
                   html_message=html_content)
 
     def send_weekly_mail(self, context, member):
-        if datetime.now(pytz.utc).isoweekday() != 2:
+        if datetime.now(pytz.utc).isoweekday() != 1:
             """only send weekly mails at mondays, return otherwise"""
             return
 
-        title = 'Top Reddit Links (Weekly)'
+        today = datetime.now().strftime('%d %b %Y')
+        title = 'Weekly Reddit Links - %s' % today
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 
     def send_daily_mail(self, context, member):
-        title = 'Top Reddit Links (Daily)'
+        today = datetime.now().strftime('%d %b %Y')
+        title = 'Daily Reddit Links - %s' % today
         html_content = render_to_string('email/template.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
