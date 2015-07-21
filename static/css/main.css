@@ -24,6 +24,14 @@ html #content, body #content {
 html a, body a {
   color: #FF4500;
 }
+/* line 19, ../sass/components/_core.scss */
+html a:hover, body a:hover {
+  color: #FF4500;
+}
+/* line 22, ../sass/components/_core.scss */
+html .primary-color, body .primary-color {
+  color: #FF4500;
+}
 
 /* line 1, ../sass/components/_header.scss */
 .header {

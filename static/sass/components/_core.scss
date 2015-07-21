@@ -16,5 +16,8 @@ html, body {
 
     a {
         color: $primary-color;
+        &:hover {color: $primary-color;}
     }
+
+    .primary-color {color: $primary-color;}
 }
