@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="card">
+          hello there <br/>
+          {{member.email}}
+          <br/><br/>
+          we have deactivated your subscription.
+          <br/><br/>
+          thanks for trying out reddit.cool, <br/>
+          we hope you enjoyed your mails. <br/>
+          if you have any feedback <br/>
+          we would like to hear from you.
+          <br/><br/>
+          email us at <span class="primary-color">contact@reddit.cool</span>
+          </a>
+        </div>
+
+      </div> <!-- /col-xs-6 -->
+    </div> <!-- /row -->
+
+  </div>
+{% endblock %}

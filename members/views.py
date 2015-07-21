@@ -15,6 +15,11 @@ class MemberUpdateView(View):
         member.save()
         return member
 
+    def unsubscribe(self, member):
+        member.is_active = False
+        member.save()
+        return member
+
 
 class ToWeekly(TemplateView, MemberUpdateView):
     template_name = 'members/toweekly.html'
@@ -38,6 +43,20 @@ class ToDaily(TemplateView, MemberUpdateView):
 
         member = self.get_member()
         self.update_member_rate(member, "d")
+
+        context['member'] = member
+        context['host'] = settings.HOST
+        return context
+
+
+class Unsubscribe(TemplateView, MemberUpdateView):
+    template_name = 'members/unsubscribe.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Unsubscribe, self).get_context_data(**kwargs)
+
+        member = self.get_member()
+        self.unsubscribe(member)
 
         context['member'] = member
         context['host'] = settings.HOST
