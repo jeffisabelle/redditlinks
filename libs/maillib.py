@@ -1,6 +1,7 @@
 import pytz
 from datetime import datetime
 
+from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -13,6 +14,7 @@ class MailLib(object):
         ctx = dict()
         ctx['member'] = member
         ctx['rate'] = member.rate
+        ctx['host'] = settings.HOST
         ctx['data'] = {}
 
         subscriptions = member.get_subscriptions()
