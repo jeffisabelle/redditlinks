@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="card">
+          hello there <br/>
+          {{member.email}}
+          <br/><br/>
+          you can update your subreddit preferences from here
+          <div id="react-container"></div>
+        </div>
+
+      </div> <!-- /col-xs-6 -->
+    </div> <!-- /row -->
+
+  </div>
+{% endblock %}
+
+{% block "jsimports" %}
+  <!-- include javascripts -->
+  {{ super }}
+  <script type="text/javascript" src="https://fb.me/react-0.13.3.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/preferences.js"></script>
+{% endblock %}
