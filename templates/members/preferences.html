@@ -3,17 +3,18 @@
 {% block "content" %}
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
+        <!-- <div class="card">
+        {{member.email}} - preferences
+        </div> -->
+      </div>
+    </div>
 
-        <div class="card">
-          hello there <br/>
-          {{member.email}}
-          <br/><br/>
-          you can update your subreddit preferences from here
-          <div id="react-container"></div>
-        </div>
+    <div class="row">
 
-      </div> <!-- /col-xs-6 -->
+      <div class="col-md-12">
+        <div id="react-container"></div>
+      </div>
     </div> <!-- /row -->
 
   </div>
@@ -21,7 +22,7 @@
 
 {% block "jsimports" %}
   <!-- include javascripts -->
-  {{ super }}
+  {{ block.super }}
   <script type="text/javascript" src="https://fb.me/react-0.13.3.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/preferences.js"></script>
 {% endblock %}
