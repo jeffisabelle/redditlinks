@@ -68,3 +68,8 @@ html .primary-color, body .primary-color {
   padding: 30px 40px;
   border-left: 7px solid #525252;
 }
+
+/* line 1, ../sass/components/_icons.scss */
+.action-icon {
+  padding: 5px 10px;
+}
