@@ -71,5 +71,22 @@ html .primary-color, body .primary-color {
 
 /* line 1, ../sass/components/_icons.scss */
 .action-icon {
-  padding: 5px 10px;
+  padding: 8px 13px;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.3s;
+}
+/* line 7, ../sass/components/_icons.scss */
+.action-icon:hover {
+  background-color: #222;
+  color: #FDFDFD;
+}
+/* line 12, ../sass/components/_icons.scss */
+.action-icon.impossible {
+  color: red;
+  cursor: default;
+}
+/* line 16, ../sass/components/_icons.scss */
+.action-icon.impossible:hover {
+  background-color: #FDFDFD;
 }
