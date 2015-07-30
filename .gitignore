@@ -30,3 +30,4 @@ do.org
 fabfile.py
 *.sass-cache/
 *.module-cache/
+node_modules/
