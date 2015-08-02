@@ -3,7 +3,6 @@
 /* $secondary-color: #FFD503; */
 /* $tertiary-color: #E85151; */
 /* font-sizes */
-/* line 1, ../sass/components/_core.scss */
 html, body {
   height: 100%;
   min-height: 100%;
@@ -14,39 +13,32 @@ html, body {
   font-weight: 700;
   color: #010101;
 }
-/* line 11, ../sass/components/_core.scss */
 html #content, body #content {
   height: auto;
   min-height: 100%;
   padding-bottom: 100px;
 }
-/* line 17, ../sass/components/_core.scss */
 html a, body a {
   color: #FF4500;
 }
-/* line 19, ../sass/components/_core.scss */
 html a:hover, body a:hover {
   color: #FF4500;
 }
-/* line 22, ../sass/components/_core.scss */
 html .primary-color, body .primary-color {
   color: #FF4500;
 }
 
-/* line 1, ../sass/components/_header.scss */
 .header {
   /* background-color: $white; */
   /* border-bottom: 7px solid #eee; */
   /* background-color: #eee; */
   border-bottom: 7px solid #FDFDFD;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
-/* line 10, ../sass/components/_header.scss */
 .header .logo-wrapper img.logo {
   margin: 30px auto;
 }
 
-/* line 1, ../sass/components/_footer.scss */
 .footer {
   clear: both;
   position: relative;
@@ -63,30 +55,72 @@ html .primary-color, body .primary-color {
   color: #0A0A0A;
 }
 
-/* line 1, ../sass/components/_cards.scss */
 .card {
   padding: 30px 40px;
   border-left: 7px solid #525252;
 }
 
-/* line 1, ../sass/components/_icons.scss */
 .action-icon {
   padding: 8px 13px;
   cursor: pointer;
   transition-property: all;
   transition-duration: 0.3s;
 }
-/* line 7, ../sass/components/_icons.scss */
 .action-icon:hover {
   background-color: #222;
   color: #FDFDFD;
 }
-/* line 12, ../sass/components/_icons.scss */
 .action-icon.impossible {
   color: red;
   cursor: default;
 }
-/* line 16, ../sass/components/_icons.scss */
 .action-icon.impossible:hover {
   background-color: #FDFDFD;
+}
+
+.preference-form .form-control {
+  width: 250px;
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+.preference-form .select-box {
+  width: 60px;
+  display: inline-block;
+  padding: 5px 15px;
+}
+.preference-form .btn i {
+  font-size: 0.7em;
+  padding: 0 5px;
+}
+
+.panel-heading {
+  background-color: #EB5A33 !important;
+  color: #FDFDFD !important;
+}
+
+.table {
+  font-weight: normal;
+}
+
+/* typeahead */
+.tt-menu {
+  width: 250px;
+  background-color: #fff;
+  padding: 10px;
+  font-weight: normal;
+  font-size: 0.7em;
+  border: 1px solid #ddd;
+}
+.tt-menu .tt-suggestion {
+  border-bottom: 1px solid #ddd;
+  padding: 7px 0;
+  cursor: pointer;
+}
+.tt-menu .tt-suggestion:hover {
+  padding-left: 5px;
+}
+.tt-menu .tt-suggestion:last-child {
+  border-bottom: none;
 }
