@@ -12,5 +12,6 @@ urlpatterns = patterns(
     '', url(r'^admin/', include(admin.site.urls)),
     url('^$', Homepage.as_view(), name='homepage'),
     url('^members/', include('members.urls')),
+    url('^subs/', include('subs.urls')),
     url('^example-mail/', ExampleMail.as_view(), name='examplemail'),
 )
