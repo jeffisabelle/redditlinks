@@ -6,7 +6,6 @@ django
 settings_local.py
 *.db
 TAGS
-data
 docs/_build
 docs/build
 docs/api
