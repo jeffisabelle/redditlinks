@@ -31,13 +31,13 @@ var Preference = React.createClass({displayName: "Preference",
       increaseClass = "fa fa-angle-up action-icon impossible";
     }
     return (
-      React.createElement("tr", null,
-        React.createElement("td", null, this.props.subreddit),
-        React.createElement("td", null, this.props.count),
-        React.createElement("td", null,
-          React.createElement("i", {className: deleteClass, onClick: this.deleteThis,
-             "data-toggle": "tooltip", "data-placement": "left", title: "Delete Subscription"}),
-          React.createElement("i", {className: increaseClass, onClick: this.increase}),
+      React.createElement("tr", null, 
+        React.createElement("td", null, this.props.subreddit), 
+        React.createElement("td", null, this.props.count), 
+        React.createElement("td", null, 
+          React.createElement("i", {className: deleteClass, onClick: this.deleteThis, 
+             "data-toggle": "tooltip", "data-placement": "left", title: "Delete Subscription"}), 
+          React.createElement("i", {className: increaseClass, onClick: this.increase}), 
           React.createElement("i", {className: decreaseClass, onClick: this.decrease})
         )
       )
@@ -65,22 +65,56 @@ var PreferencesList = React.createClass({displayName: "PreferencesList",
     var updateData = this.updateData;
     var preferenceNodes = this.props.data.map(function (pref) {
       return (
-        React.createElement(Preference, {subreddit: pref.subreddit, count: pref.count,
+        React.createElement(Preference, {subreddit: pref.subreddit, count: pref.count, 
                     update: updateData})
       );
     });
     return (
-      React.createElement("div", {className: "prefernces-list"},
-        React.createElement("table", {className: "table"},
-          React.createElement("thead", null,
-            React.createElement("th", null, "Subreddit"),
-            React.createElement("th", null, "Link Count"),
+      React.createElement("div", {className: "prefernces-list"}, 
+        React.createElement("table", {className: "table"}, 
+          React.createElement("thead", null, 
+            React.createElement("th", null, "Subreddit"), 
+            React.createElement("th", null, "Link Count"), 
             React.createElement("th", null, "Actions")
-          ),
-          React.createElement("tbody", null,
+          ), 
+          React.createElement("tbody", null, 
             preferenceNodes
           )
         )
+      )
+    )
+  }
+});
+
+var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm",
+  insertSubscription: function() {
+    var subreddit = $("#subreddit").val();
+    var count = 3;
+    var new_data = this.props.data;
+    new_data.unshift({"subreddit": subreddit, "count": count});
+    this.props.saveData(new_data);
+  },
+  render: function() {
+    return (
+      React.createElement("div", {className: "row preference-form"}, 
+        React.createElement("div", {className: "col-xs-12"}, 
+          React.createElement("input", {type: "text", className: "form-control typeahead", 
+                 id: "subreddit", placeholder: "Subreddit: /r/example"}), 
+
+          React.createElement("select", {className: "form-control select-box"}, 
+            React.createElement("option", null, "1"), 
+            React.createElement("option", null, "2"), 
+            React.createElement("option", null, "3"), 
+            React.createElement("option", null, "4"), 
+            React.createElement("option", null, "5")
+          ), 
+
+          React.createElement("a", {className: "btn btn-default", href: "#", role: "button", 
+             onClick: this.insertSubscription}, 
+            React.createElement("i", {className: "fa fa-plus"}), " Insert New Subscription"
+          )
+        )
+
       )
     )
   }
@@ -117,12 +151,29 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
   },
   render: function() {
     return (
-      React.createElement("div", {className: "prefrences-box"},
-        React.createElement(PreferencesList, {data: this.state.data, saveData: this.saveDataToServer})
+      React.createElement("div", {className: "prefrences-box"}, 
+        React.createElement("div", {className: "panel panel-default"}, 
+          React.createElement("div", {className: "panel-heading"}, 
+            "New Subscription"
+          ), 
+          React.createElement("div", {className: "panel-body"}, 
+            React.createElement(PreferenceInsertForm, {data: this.state.data, saveData: this.saveDataToServer})
+          )
+        ), 
+
+        React.createElement("div", {className: "panel panel-default"}, 
+          React.createElement("div", {className: "panel-heading"}, 
+            "Manage Subscriptions"
+          ), 
+          React.createElement("div", {className: "panel-body"}, 
+            React.createElement(PreferencesList, {data: this.state.data, saveData: this.saveDataToServer})
+          )
+        )
       )
     );
   }
 });
+
 
 React.render(
   React.createElement(PreferencesBox, null),

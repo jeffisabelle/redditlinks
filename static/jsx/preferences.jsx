@@ -86,6 +86,40 @@ var PreferencesList = React.createClass({
   }
 });
 
+var PreferenceInsertForm = React.createClass({
+  insertSubscription: function() {
+    var subreddit = $("#subreddit").val();
+    var count = 3;
+    var new_data = this.props.data;
+    new_data.unshift({"subreddit": subreddit, "count": count});
+    this.props.saveData(new_data);
+  },
+  render: function() {
+    return (
+      <div className="row preference-form">
+        <div className="col-xs-12">
+          <input type="text" className="form-control typeahead"
+                 id="subreddit" placeholder="Subreddit: /r/example" />
+
+          <select className="form-control select-box">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+
+          <a className="btn btn-default" href="#" role="button"
+             onClick={this.insertSubscription}>
+            <i className="fa fa-plus"></i> Insert New Subscription
+          </a>
+        </div>
+
+      </div>
+    )
+  }
+});
+
 var PreferencesBox = React.createClass({
   getDataFromServer: function() {
     var member_uuid = urlParam("member");
@@ -118,11 +152,28 @@ var PreferencesBox = React.createClass({
   render: function() {
     return (
       <div className="prefrences-box">
-        <PreferencesList data={this.state.data} saveData={this.saveDataToServer} />
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            New Subscription
+          </div>
+          <div className="panel-body">
+            <PreferenceInsertForm data={this.state.data} saveData={this.saveDataToServer} />
+          </div>
+        </div>
+
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            Manage Subscriptions
+          </div>
+          <div className="panel-body">
+            <PreferencesList data={this.state.data} saveData={this.saveDataToServer} />
+          </div>
+        </div>
       </div>
     );
   }
 });
+
 
 React.render(
   <PreferencesBox />,
