@@ -123,18 +123,19 @@ var PreferenceInsertForm = React.createClass({
           <input type="text" className="form-control typeahead"
                  id="subreddit" placeholder="Subreddit: /r/example" />
 
-          <select className="form-control select-box">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select id="linkcount" className="form-control select-box">
+            <option value={0}>Link Count</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
           </select>
 
-          <a className="btn btn-default" href="#" role="button"
+          <button className="btn btn-default" role="button"
              onClick={this.insertSubscription}>
             <i className="fa fa-plus"></i> Insert New Subscription
-          </a>
+          </button>
         </div>
 
       </div>
@@ -172,6 +173,13 @@ var PreferencesBox = React.createClass({
     this.getDataFromServer();
   },
   render: function() {
+    var panelClassName = "panel panel-default";
+    if(this.state.data.length == 0) {
+      panelClassName = "panel panel-default empty";
+    } else {
+      panelClassName = "panel panel-default";
+    }
+
     return (
       <div className="prefrences-box">
         <div className="panel panel-default">
@@ -183,7 +191,7 @@ var PreferencesBox = React.createClass({
           </div>
         </div>
 
-        <div className="panel panel-default">
+        <div className={panelClassName}>
           <div className="panel-heading">
             Manage Subscriptions
           </div>
