@@ -8,9 +8,10 @@
     }
 
     .select-box {
-        width: 60px;
+        width: 130px;
         display: inline-block;
         padding: 5px 15px;
+
     }
 
     .btn {
@@ -19,6 +20,10 @@
             padding: 0 5px;
         }
     }
+}
+
+.empty {
+    display: none;
 }
 
 .panel-heading {
