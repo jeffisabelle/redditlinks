@@ -3,6 +3,12 @@ var urlParam = function (name) {
     return decodeURIComponent(name[1]);
 }
 
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}
+
 var Preference = React.createClass({displayName: "Preference",
   increase: function() {
     if(this.props.count == 10) {
@@ -69,6 +75,7 @@ var PreferencesList = React.createClass({displayName: "PreferencesList",
                     update: updateData})
       );
     });
+    var hasPreferences = preferenceNodes.length != 0;
     return (
       React.createElement("div", {className: "prefernces-list"}, 
         React.createElement("table", {className: "table"}, 
@@ -88,11 +95,26 @@ var PreferencesList = React.createClass({displayName: "PreferencesList",
 
 var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm",
   insertSubscription: function() {
-    var subreddit = $("#subreddit").val();
-    var count = 3;
+    var subreddit = $("#subreddit");
+    var count = $("#linkcount option:selected").val();
+
+    if (!subreddit.val().startsWith("/r/")) {
+      alert("Subreddit should start with /r/");
+      subreddit.val("");
+      subreddit.focus();
+      return
+    }
+
+    if (count==0) {
+      alert("You should set the link count");
+      return
+    }
+
     var new_data = this.props.data;
-    new_data.unshift({"subreddit": subreddit, "count": count});
+    new_data.unshift({"subreddit": subreddit.val(), "count": count});
     this.props.saveData(new_data);
+
+    subreddit.val("");
   },
   render: function() {
     return (
@@ -101,15 +123,16 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
           React.createElement("input", {type: "text", className: "form-control typeahead", 
                  id: "subreddit", placeholder: "Subreddit: /r/example"}), 
 
-          React.createElement("select", {className: "form-control select-box"}, 
-            React.createElement("option", null, "1"), 
-            React.createElement("option", null, "2"), 
-            React.createElement("option", null, "3"), 
-            React.createElement("option", null, "4"), 
-            React.createElement("option", null, "5")
+          React.createElement("select", {id: "linkcount", className: "form-control select-box"}, 
+            React.createElement("option", {value: 0}, "Link Count"), 
+            React.createElement("option", {value: 1}, "1"), 
+            React.createElement("option", {value: 2}, "2"), 
+            React.createElement("option", {value: 3}, "3"), 
+            React.createElement("option", {value: 4}, "4"), 
+            React.createElement("option", {value: 5}, "5")
           ), 
 
-          React.createElement("a", {className: "btn btn-default", href: "#", role: "button", 
+          React.createElement("button", {className: "btn btn-default", role: "button", 
              onClick: this.insertSubscription}, 
             React.createElement("i", {className: "fa fa-plus"}), " Insert New Subscription"
           )
@@ -150,6 +173,13 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
     this.getDataFromServer();
   },
   render: function() {
+    var panelClassName = "panel panel-default";
+    if(this.state.data.length == 0) {
+      panelClassName = "panel panel-default empty";
+    } else {
+      panelClassName = "panel panel-default";
+    }
+
     return (
       React.createElement("div", {className: "prefrences-box"}, 
         React.createElement("div", {className: "panel panel-default"}, 
@@ -161,7 +191,7 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
           )
         ), 
 
-        React.createElement("div", {className: "panel panel-default"}, 
+        React.createElement("div", {className: panelClassName}, 
           React.createElement("div", {className: "panel-heading"}, 
             "Manage Subscriptions"
           ), 
