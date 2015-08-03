@@ -1,6 +1,6 @@
 """
 last parsed subreddit:
-49 : /r/flytying/                   2sfbh      Fly Tying
+74 : /r/fridaynightlights - 2u18l - Clear eyes, full hearts, can't lose!
 
 align after according to this and concat the output file
 """
@@ -9,7 +9,7 @@ import requests
 import json
 import time
 
-total_pages = 50
+total_pages = 75
 counter = 0
 subreddits = []
 after = ""
@@ -25,7 +25,9 @@ while counter < total_pages:
     for sub in response['data']['children']:
         data = sub['data']
         title, url, sub_id = data['title'], data['url'], data['id']
-        subreddits.append(url)
+        if url.endswith("/"):
+            url = url[:-1]
+        subreddits.append(url.lower())
         after = "&after=t5_%s" % sub_id
         print "%-3s: %-30s %-10s %-50s" % (counter, url, sub_id, title[:50])
 
