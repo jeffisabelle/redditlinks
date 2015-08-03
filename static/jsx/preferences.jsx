@@ -75,6 +75,7 @@ var PreferencesList = React.createClass({
                     update={updateData} />
       );
     });
+    var hasPreferences = preferenceNodes.length != 0;
     return (
       <div className="prefernces-list">
         <table className="table">
@@ -94,11 +95,26 @@ var PreferencesList = React.createClass({
 
 var PreferenceInsertForm = React.createClass({
   insertSubscription: function() {
-    var subreddit = $("#subreddit").val();
-    var count = 3;
+    var subreddit = $("#subreddit");
+    var count = $("#linkcount option:selected").val();
+
+    if (!subreddit.val().startsWith("/r/")) {
+      alert("Subreddit should start with /r/");
+      subreddit.val("");
+      subreddit.focus();
+      return
+    }
+
+    if (count==0) {
+      alert("You should set the link count");
+      return
+    }
+
     var new_data = this.props.data;
-    new_data.unshift({"subreddit": subreddit, "count": count});
+    new_data.unshift({"subreddit": subreddit.val(), "count": count});
     this.props.saveData(new_data);
+
+    subreddit.val("");
   },
   render: function() {
     return (
