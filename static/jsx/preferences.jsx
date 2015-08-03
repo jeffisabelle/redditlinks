@@ -3,6 +3,12 @@ var urlParam = function (name) {
     return decodeURIComponent(name[1]);
 }
 
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}
+
 var Preference = React.createClass({
   increase: function() {
     if(this.props.count == 10) {
