@@ -12,14 +12,14 @@ if (typeof String.prototype.startsWith != 'function') {
 var Preference = React.createClass({displayName: "Preference",
   increase: function() {
     if(this.props.count == 10) {
-      return false;
+      return;
     }
     var new_count = this.props.count + 1;
     this.props.update(this.props.subreddit, new_count, "increase");
   },
   decrease: function() {
     if(this.props.count == 1) {
-      return false;
+      return;
     }
     var new_count = this.props.count - 1;
     this.props.update(this.props.subreddit, new_count, "decrease");
@@ -42,9 +42,14 @@ var Preference = React.createClass({displayName: "Preference",
         React.createElement("td", null, this.props.count), 
         React.createElement("td", null, 
           React.createElement("i", {className: deleteClass, onClick: this.deleteThis, 
-             "data-toggle": "tooltip", "data-placement": "left", title: "Delete Subscription"}), 
-          React.createElement("i", {className: increaseClass, onClick: this.increase}), 
-          React.createElement("i", {className: decreaseClass, onClick: this.decrease})
+             "data-toggle": "tooltip", "data-placement": "left", 
+             title: "Delete Subscription"}), 
+          React.createElement("i", {className: increaseClass, onClick: this.increase, 
+             "data-toggle": "tooltip", "data-placement": "top", 
+             title: "Increase Link Count"}), 
+          React.createElement("i", {className: decreaseClass, onClick: this.decrease, 
+             "data-toggle": "tooltip", "data-placement": "top", 
+             title: "Decrease Link Count"})
         )
       )
     )
@@ -111,33 +116,90 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
     }
 
     var new_data = this.props.data;
-    new_data.unshift({"subreddit": subreddit.val(), "count": count});
+    new_data.unshift({"subreddit": subreddit.val(), "count": Number(count)});
     this.props.saveData(new_data);
 
     subreddit.val("");
   },
+  totalCounts: function() {
+    var totalLinkCount = 0;
+    var totalSubredditCount = 0;
+    this.props.data.map(function(pref) {
+      totalLinkCount += Number(pref.count);
+      totalSubredditCount += 1;
+    });
+    var out = {
+      "totalLink": Number(totalLinkCount),
+      "totalSubreddits": Number(totalSubredditCount)
+    };
+    return out;
+  },
   render: function() {
+    var counts = this.totalCounts();
     return (
       React.createElement("div", {className: "row preference-form"}, 
-        React.createElement("div", {className: "col-xs-12"}, 
-          React.createElement("input", {type: "text", className: "form-control typeahead", 
-                 id: "subreddit", placeholder: "Subreddit: /r/example"}), 
+        React.createElement("div", {className: "col-lg-6"}, 
+          React.createElement("table", {className: "table"}, 
+            React.createElement("thead", null, 
+              React.createElement("th", {colSpan: 2}, "Subreddit Insertion")
+            ), 
+            React.createElement("tbody", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "Subreddit"), 
+                React.createElement("td", null, 
+                  React.createElement("input", {type: "text", className: "form-control typeahead", 
+                         id: "subreddit", placeholder: "/r/example"})
+                )
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "Link Count"), 
+                React.createElement("td", null, 
+                  React.createElement("select", {id: "linkcount", className: "form-control select-box"}, 
+                    React.createElement("option", {value: 0}, "Link Count"), 
+                    React.createElement("option", {value: 1}, "1"), 
+                    React.createElement("option", {value: 2}, "2"), 
+                    React.createElement("option", {value: 3}, "3"), 
+                    React.createElement("option", {value: 4}, "4"), 
+                    React.createElement("option", {value: 5}, "5")
+                  )
+                )
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", {colSpan: 2}, 
+                  React.createElement("button", {className: "btn btn-default", role: "button", 
+                          onClick: this.insertSubscription}, 
+                    React.createElement("i", {className: "fa fa-plus"}), " Insert New Subscription"
+                  )
+                )
+              )
+            )
 
-          React.createElement("select", {id: "linkcount", className: "form-control select-box"}, 
-            React.createElement("option", {value: 0}, "Link Count"), 
-            React.createElement("option", {value: 1}, "1"), 
-            React.createElement("option", {value: 2}, "2"), 
-            React.createElement("option", {value: 3}, "3"), 
-            React.createElement("option", {value: 4}, "4"), 
-            React.createElement("option", {value: 5}, "5")
-          ), 
 
-          React.createElement("button", {className: "btn btn-default", role: "button", 
-             onClick: this.insertSubscription}, 
-            React.createElement("i", {className: "fa fa-plus"}), " Insert New Subscription"
+          )
+
+
+        ), 
+
+        React.createElement("div", {className: "col-lg-6"}, 
+          React.createElement("table", {className: "table"}, 
+            React.createElement("thead", null, 
+              React.createElement("th", {colSpan: 2}, "Membership Info")
+            ), 
+            React.createElement("tbody", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "Total Links"), 
+                React.createElement("td", null, counts.totalLink)
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "Total Subreddits"), 
+                React.createElement("td", null, counts.totalSubreddits)
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", {colSpan: 2}, this.props.member.email)
+              )
+            )
           )
         )
-
       )
     )
   }
@@ -145,6 +207,7 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
 
 var PreferencesBox = React.createClass({displayName: "PreferencesBox",
   getDataFromServer: function() {
+    console.log(this.props.member);
     var member_uuid = urlParam("member");
     var token_uuid = urlParam("token");
     var url = location.origin + location.pathname + "/json/" + location.search;
@@ -162,9 +225,20 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
     });
   },
   saveDataToServer: function(data) {
+    var url = location.origin + location.pathname + "/json/" + location.search;
     console.log("data to be saved");
     this.setState({data: data});
-    console.log(data);
+    var d = JSON.stringify({"arr": data});
+    console.log(d);
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: d,
+      dataType: "json",
+      contentType: "application/json"
+    });
+
   },
   getInitialState: function() {
     return {data: []};
@@ -187,7 +261,8 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
             "New Subscription"
           ), 
           React.createElement("div", {className: "panel-body"}, 
-            React.createElement(PreferenceInsertForm, {data: this.state.data, saveData: this.saveDataToServer})
+            React.createElement(PreferenceInsertForm, {data: this.state.data, saveData: this.saveDataToServer, 
+                                  member: this.props.member})
           )
         ), 
 
@@ -206,6 +281,6 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
 
 
 React.render(
-  React.createElement(PreferencesBox, null),
+  React.createElement(PreferencesBox, {member: member}),
   document.getElementById('react-container')
 );

@@ -12,14 +12,14 @@ if (typeof String.prototype.startsWith != 'function') {
 var Preference = React.createClass({
   increase: function() {
     if(this.props.count == 10) {
-      return false;
+      return;
     }
     var new_count = this.props.count + 1;
     this.props.update(this.props.subreddit, new_count, "increase");
   },
   decrease: function() {
     if(this.props.count == 1) {
-      return false;
+      return;
     }
     var new_count = this.props.count - 1;
     this.props.update(this.props.subreddit, new_count, "decrease");
@@ -42,9 +42,14 @@ var Preference = React.createClass({
         <td>{this.props.count}</td>
         <td>
           <i className={deleteClass} onClick={this.deleteThis}
-             data-toggle="tooltip" data-placement="left" title="Delete Subscription"></i>
-          <i className={increaseClass} onClick={this.increase}></i>
-          <i className={decreaseClass} onClick={this.decrease}></i>
+             data-toggle="tooltip" data-placement="left"
+             title="Delete Subscription"></i>
+          <i className={increaseClass} onClick={this.increase}
+             data-toggle="tooltip" data-placement="top"
+             title="Increase Link Count"></i>
+          <i className={decreaseClass} onClick={this.decrease}
+             data-toggle="tooltip" data-placement="top"
+             title="Decrease Link Count"></i>
         </td>
       </tr>
     )
@@ -111,33 +116,90 @@ var PreferenceInsertForm = React.createClass({
     }
 
     var new_data = this.props.data;
-    new_data.unshift({"subreddit": subreddit.val(), "count": count});
+    new_data.unshift({"subreddit": subreddit.val(), "count": Number(count)});
     this.props.saveData(new_data);
 
     subreddit.val("");
   },
+  totalCounts: function() {
+    var totalLinkCount = 0;
+    var totalSubredditCount = 0;
+    this.props.data.map(function(pref) {
+      totalLinkCount += Number(pref.count);
+      totalSubredditCount += 1;
+    });
+    var out = {
+      "totalLink": Number(totalLinkCount),
+      "totalSubreddits": Number(totalSubredditCount)
+    };
+    return out;
+  },
   render: function() {
+    var counts = this.totalCounts();
     return (
       <div className="row preference-form">
-        <div className="col-xs-12">
-          <input type="text" className="form-control typeahead"
-                 id="subreddit" placeholder="Subreddit: /r/example" />
+        <div className="col-lg-6">
+          <table className="table">
+            <thead>
+              <th colSpan={2}>Subreddit Insertion</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Subreddit</td>
+                <td>
+                  <input type="text" className="form-control typeahead"
+                         id="subreddit" placeholder="/r/example" />
+                </td>
+              </tr>
+              <tr>
+                <td>Link Count</td>
+                <td>
+                  <select id="linkcount" className="form-control select-box">
+                    <option value={0}>Link Count</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={2}>
+                  <button className="btn btn-default" role="button"
+                          onClick={this.insertSubscription}>
+                    <i className="fa fa-plus"></i> Insert New Subscription
+                  </button>
+                </td>
+              </tr>
+            </tbody>
 
-          <select id="linkcount" className="form-control select-box">
-            <option value={0}>Link Count</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
 
-          <button className="btn btn-default" role="button"
-             onClick={this.insertSubscription}>
-            <i className="fa fa-plus"></i> Insert New Subscription
-          </button>
+          </table>
+
+
         </div>
 
+        <div className="col-lg-6">
+          <table className="table">
+            <thead>
+              <th colSpan={2}>Membership Info</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Total Links</td>
+                <td>{counts.totalLink}</td>
+              </tr>
+              <tr>
+                <td>Total Subreddits</td>
+                <td>{counts.totalSubreddits}</td>
+              </tr>
+              <tr>
+                <td colSpan={2}>{this.props.member.email}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
@@ -145,6 +207,7 @@ var PreferenceInsertForm = React.createClass({
 
 var PreferencesBox = React.createClass({
   getDataFromServer: function() {
+    console.log(this.props.member);
     var member_uuid = urlParam("member");
     var token_uuid = urlParam("token");
     var url = location.origin + location.pathname + "/json/" + location.search;
@@ -162,9 +225,20 @@ var PreferencesBox = React.createClass({
     });
   },
   saveDataToServer: function(data) {
+    var url = location.origin + location.pathname + "/json/" + location.search;
     console.log("data to be saved");
     this.setState({data: data});
-    console.log(data);
+    var d = JSON.stringify({"arr": data});
+    console.log(d);
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: d,
+      dataType: "json",
+      contentType: "application/json"
+    });
+
   },
   getInitialState: function() {
     return {data: []};
@@ -187,7 +261,8 @@ var PreferencesBox = React.createClass({
             New Subscription
           </div>
           <div className="panel-body">
-            <PreferenceInsertForm data={this.state.data} saveData={this.saveDataToServer} />
+            <PreferenceInsertForm data={this.state.data} saveData={this.saveDataToServer}
+                                  member={this.props.member} />
           </div>
         </div>
 
@@ -206,6 +281,6 @@ var PreferencesBox = React.createClass({
 
 
 React.render(
-  <PreferencesBox />,
+  <PreferencesBox member={member}/>,
   document.getElementById('react-container')
 );
