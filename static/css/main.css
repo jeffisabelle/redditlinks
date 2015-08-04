@@ -68,14 +68,14 @@ html .primary-color, body .primary-color {
 }
 .action-icon:hover {
   background-color: #222;
-  color: #FDFDFD;
+  color: #fff;
 }
 .action-icon.impossible {
   color: red;
-  cursor: default;
+  cursor: not-allowed;
 }
 .action-icon.impossible:hover {
-  background-color: #FDFDFD;
+  background-color: #fff;
 }
 
 .preference-form .form-control {
@@ -84,6 +84,7 @@ html .primary-color, body .primary-color {
   padding: 5px 10px;
   margin-right: 15px;
   vertical-align: middle;
+  outline: none;
 }
 .preference-form .select-box {
   width: 130px;
