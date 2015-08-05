@@ -116,9 +116,16 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
     }
 
     var new_data = this.props.data;
+    var all_subreddits = this.props.subreddits;
+
+    var found = $.inArray(subreddit.val(), all_subreddits) > -1;
+    if(!found) {
+      alert("We are currently only allowing predefined subreddits. Sorry");
+      return
+    }
+
     new_data.unshift({"subreddit": subreddit.val(), "count": Number(count)});
     this.props.saveData(new_data);
-
     subreddit.val("");
   },
   totalCounts: function() {
@@ -207,7 +214,6 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
 
 var PreferencesBox = React.createClass({displayName: "PreferencesBox",
   getDataFromServer: function() {
-    console.log(this.props.member);
     var member_uuid = urlParam("member");
     var token_uuid = urlParam("token");
     var url = location.origin + location.pathname + "/json/" + location.search;
@@ -228,7 +234,7 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
     var url = location.origin + location.pathname + "/json/" + location.search;
     console.log("data to be saved");
     this.setState({data: data});
-    var d = JSON.stringify({"arr": data});
+    var d = JSON.stringify(data);
     console.log(d);
 
     $.ajax({
@@ -241,10 +247,24 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
 
   },
   getInitialState: function() {
-    return {data: []};
+    return {data: [], subreddits: []};
+  },
+  getSubredditList: function() {
+    $.ajax({
+      url: "/subs/subreddits/json/",
+      dataType: 'json',
+      cache: false,
+      success: function(response) {
+        this.setState({subreddits: response["subreddits"]});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
   componentDidMount: function() {
     this.getDataFromServer();
+    this.getSubredditList();
   },
   render: function() {
     var panelClassName = "panel panel-default";
@@ -253,7 +273,6 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
     } else {
       panelClassName = "panel panel-default";
     }
-
     return (
       React.createElement("div", {className: "prefrences-box"}, 
         React.createElement("div", {className: "panel panel-default"}, 
@@ -261,8 +280,10 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
             "New Subscription"
           ), 
           React.createElement("div", {className: "panel-body"}, 
-            React.createElement(PreferenceInsertForm, {data: this.state.data, saveData: this.saveDataToServer, 
-                                  member: this.props.member})
+            React.createElement(PreferenceInsertForm, {data: this.state.data, 
+                                  member: this.props.member, 
+                                  subreddits: this.state.subreddits, 
+                                  saveData: this.saveDataToServer})
           )
         ), 
 
@@ -286,7 +307,7 @@ React.render(
 );
 
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
 })
 
 var substringMatcher = function(strs) {
