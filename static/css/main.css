@@ -150,6 +150,7 @@ html .primary-color, body .primary-color {
     vertical-align: middle;
   }
   .table tbody tr td .action-icon, .table th .action-icon {
-    padding: 3px;
+    padding: 3px 7px;
+    font-size: 1.4em;
   }
 }

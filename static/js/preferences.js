@@ -86,7 +86,7 @@ var PreferencesList = React.createClass({displayName: "PreferencesList",
         React.createElement("table", {className: "table"}, 
           React.createElement("thead", null, 
             React.createElement("th", null, "Subreddit"), 
-            React.createElement("th", null, "Link Count"), 
+            React.createElement("th", null, "Count"), 
             React.createElement("th", null, "Actions")
           ), 
           React.createElement("tbody", null, 
@@ -265,6 +265,9 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
   componentDidMount: function() {
     this.getDataFromServer();
     this.getSubredditList();
+  },
+  componentDidUpdate: function() {
+    $('[data-toggle="tooltip"]').tooltip();
   },
   render: function() {
     var panelClassName = "panel panel-default";

@@ -86,7 +86,7 @@ var PreferencesList = React.createClass({
         <table className="table">
           <thead>
             <th>Subreddit</th>
-            <th>Link Count</th>
+            <th>Count</th>
             <th>Actions</th>
           </thead>
           <tbody>
@@ -265,6 +265,9 @@ var PreferencesBox = React.createClass({
   componentDidMount: function() {
     this.getDataFromServer();
     this.getSubredditList();
+  },
+  componentDidUpdate: function() {
+    $('[data-toggle="tooltip"]').tooltip();
   },
   render: function() {
     var panelClassName = "panel panel-default";
