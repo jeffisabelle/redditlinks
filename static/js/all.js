@@ -103,13 +103,6 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
     var subreddit = $("#subreddit");
     var count = $("#linkcount option:selected").val();
 
-    if (!subreddit.val().startsWith("/r/")) {
-      alert("Subreddit should start with /r/");
-      subreddit.val("");
-      subreddit.focus();
-      return
-    }
-
     if (count==0) {
       alert("You should set the link count");
       return
