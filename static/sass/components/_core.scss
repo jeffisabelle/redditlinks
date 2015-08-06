@@ -4,7 +4,12 @@ html, body {
     /* background-color: $base-background-color; */
     background-color: $white;
     font-family: $base-font-family;
-    font-size: $large-font-size;
+    font-size: $base-font-size;
+
+    @media (max-width: 1200px) {font-size: 14px;}
+    @media (max-width: 1000px) {font-size: 14px;}
+    @media (max-width: 800px) {font-size: 12px;}
+
     font-weight: $bold;
     color: $base-text-color;
 
@@ -12,6 +17,7 @@ html, body {
         height: auto;
         min-height: 100%;
         padding-bottom: $footer-height;
+        font-size: $large-font-size;
     }
 
     a {

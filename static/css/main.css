@@ -9,14 +9,30 @@ html, body {
   /* background-color: $base-background-color; */
   background-color: #FDFDFD;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 1.2em;
+  font-size: 16px;
   font-weight: 700;
   color: #010101;
+}
+@media (max-width: 1200px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1000px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+@media (max-width: 800px) {
+  html, body {
+    font-size: 12px;
+  }
 }
 html #content, body #content {
   height: auto;
   min-height: 100%;
   padding-bottom: 100px;
+  font-size: 1.2em;
 }
 html a, body a {
   color: #FF4500;
@@ -50,7 +66,6 @@ html .primary-color, body .primary-color {
   /* border-top: 10px solid #eee; */
   background-color: #eee;
   border-top: 10px solid #FDFDFD;
-  font-size: 13px;
   font-weight: 700;
   color: #0A0A0A;
 }
@@ -79,7 +94,7 @@ html .primary-color, body .primary-color {
 }
 
 .preference-form .form-control {
-  width: 250px;
+  max-width: 250px;
   display: inline-block;
   padding: 5px 10px;
   margin-right: 15px;
@@ -105,13 +120,9 @@ html .primary-color, body .primary-color {
   color: #FDFDFD !important;
 }
 
-.table {
-  font-weight: normal;
-}
-
 /* typeahead */
 .tt-menu {
-  width: 250px;
+  max-width: 250px;
   background-color: #fff;
   padding: 10px;
   font-weight: normal;
@@ -128,4 +139,17 @@ html .primary-color, body .primary-color {
 }
 .tt-menu .tt-suggestion:last-child {
   border-bottom: none;
+}
+
+.table {
+  font-weight: normal;
+}
+@media (max-width: 800px) {
+  .table tbody tr td, .table th {
+    text-align: left;
+    vertical-align: middle;
+  }
+  .table tbody tr td .action-icon, .table th .action-icon {
+    padding: 3px;
+  }
 }

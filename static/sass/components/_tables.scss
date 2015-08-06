@@ -1,0 +1,13 @@
+.table {
+    font-weight: normal;
+    tbody tr td, th {
+        @media (max-width: 800px) {
+            text-align: left;
+            vertical-align: middle;
+
+            .action-icon {
+                padding: 3px;
+            }
+        }
+    }
+}
