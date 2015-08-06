@@ -175,7 +175,7 @@ var PreferenceInsertForm = React.createClass({
                 <td colSpan={2}>
                   <button className="btn btn-default" role="button"
                           onClick={this.insertSubscription}>
-                    <i className="fa fa-plus"></i> Insert New Subscription
+                    <i className="fa fa-plus"></i> Insert New Subreddit
                   </button>
                 </td>
               </tr>
@@ -280,7 +280,7 @@ var PreferencesBox = React.createClass({
       <div className="prefrences-box">
         <div className="panel panel-default">
           <div className="panel-heading">
-            New Subscription
+            <i className="fa fa-plus-square-o"></i> New Subscription
           </div>
           <div className="panel-body">
             <PreferenceInsertForm data={this.state.data}
@@ -292,7 +292,7 @@ var PreferencesBox = React.createClass({
 
         <div className={panelClassName}>
           <div className="panel-heading">
-            Manage Subscriptions
+            <i className="fa fa-cogs"></i> Manage Subscriptions
           </div>
           <div className="panel-body">
             <PreferencesList data={this.state.data} saveData={this.saveDataToServer} />

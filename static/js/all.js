@@ -175,7 +175,7 @@ var PreferenceInsertForm = React.createClass({displayName: "PreferenceInsertForm
                 React.createElement("td", {colSpan: 2}, 
                   React.createElement("button", {className: "btn btn-default", role: "button", 
                           onClick: this.insertSubscription}, 
-                    React.createElement("i", {className: "fa fa-plus"}), " Insert New Subscription"
+                    React.createElement("i", {className: "fa fa-plus"}), " Insert New Subreddit"
                   )
                 )
               )
@@ -280,7 +280,7 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
       React.createElement("div", {className: "prefrences-box"}, 
         React.createElement("div", {className: "panel panel-default"}, 
           React.createElement("div", {className: "panel-heading"}, 
-            "New Subscription"
+            React.createElement("i", {className: "fa fa-plus-square-o"}), " New Subscription"
           ), 
           React.createElement("div", {className: "panel-body"}, 
             React.createElement(PreferenceInsertForm, {data: this.state.data, 
@@ -292,7 +292,7 @@ var PreferencesBox = React.createClass({displayName: "PreferencesBox",
 
         React.createElement("div", {className: panelClassName}, 
           React.createElement("div", {className: "panel-heading"}, 
-            "Manage Subscriptions"
+            React.createElement("i", {className: "fa fa-cogs"}), " Manage Subscriptions"
           ), 
           React.createElement("div", {className: "panel-body"}, 
             React.createElement(PreferencesList, {data: this.state.data, saveData: this.saveDataToServer})
