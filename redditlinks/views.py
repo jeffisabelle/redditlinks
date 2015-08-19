@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from subs.models import RedditLink
@@ -28,3 +29,7 @@ class ExampleMail(TemplateView):
             context['data'][title] = links
 
         return context
+
+
+def yandex_confirmation(request):
+    return HttpResponse("bc99ae394dc2")
