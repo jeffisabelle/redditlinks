@@ -27,7 +27,6 @@ class MailLib(object):
                 links = RedditLink.daily_links.filter(**qs_filter)[:limit]
             else:
                 links = RedditLink.weekly_links.filter(**qs_filter)[:limit]
-            title = title.replace("porn", "****")
             ctx['data'][title] = links
         return ctx
 
