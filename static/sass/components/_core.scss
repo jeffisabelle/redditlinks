@@ -21,8 +21,12 @@ html, body {
     }
 
     a {
+        outline: 0;
         color: $primary-color;
-        &:hover {color: $primary-color;}
+        &:hover, &:active, &:focus {
+            color: $primary-color;
+            outline: 0;
+        }
     }
 
     .primary-color {color: $primary-color;}
