@@ -35,10 +35,12 @@ html #content, body #content {
   font-size: 1.2em;
 }
 html a, body a {
+  outline: 0;
   color: #FF4500;
 }
-html a:hover, body a:hover {
+html a:hover, html a:active, html a:focus, body a:hover, body a:active, body a:focus {
   color: #FF4500;
+  outline: 0;
 }
 html .primary-color, body .primary-color {
   color: #FF4500;
@@ -50,6 +52,9 @@ html .primary-color, body .primary-color {
   /* background-color: #eee; */
   border-bottom: 7px solid #FDFDFD;
   /* margin-bottom: 30px; */
+}
+.header .logo-wrapper {
+  text-align: center;
 }
 .header .logo-wrapper img.logo {
   margin: 30px auto;
@@ -67,12 +72,19 @@ html .primary-color, body .primary-color {
   background-color: #eee;
   border-top: 10px solid #FDFDFD;
   font-weight: 700;
+  font-size: 0.8em;
   color: #0A0A0A;
 }
 
 .card {
   padding: 30px 40px;
   border-left: 7px solid #525252;
+}
+
+.block {
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: normal;
 }
 
 .action-icon {
