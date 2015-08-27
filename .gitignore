@@ -30,3 +30,4 @@ fabfile.py
 *.sass-cache/
 *.module-cache/
 node_modules/
+static/69b906256894.html
