@@ -109,14 +109,14 @@ var PreferenceInsertForm = React.createClass({
     }
 
     var new_data = this.props.data;
-    var all_subreddits = this.props.subreddits;
+    /* var all_subreddits = this.props.subreddits;
 
-    var found = $.inArray(subreddit.val(), all_subreddits) > -1;
-    if(!found) {
-      alert("We are currently only allowing predefined subreddits. Sorry");
-      return
-    }
-
+       var found = $.inArray(subreddit.val(), all_subreddits) > -1;
+       if(!found) {
+       alert("We are currently only allowing predefined subreddits. Sorry");
+       return
+       }
+     */
     new_data.unshift({"subreddit": subreddit.val(), "count": Number(count)});
     this.props.saveData(new_data);
     subreddit.val("");
