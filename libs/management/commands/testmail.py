@@ -2,6 +2,7 @@ from members.models import Member
 
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
+from libs.maillib import MailLib
 
 
 class Command(BaseCommand):
@@ -21,7 +22,14 @@ class Command(BaseCommand):
         return Member.objects.filter(**member_filter)
 
     def handle(self, *args, **options):
+        print('sending emails..')
+
         members = self.get_members()
+
+        ml = MailLib()
         for member in members:
-            print "Sending test mail to: %s" % member.email
-            self.sendmail([member.email])
+            print('sending mail to: %s' % member)
+            ml.process(member)
+
+        print('done..')
+        return 'mails-sent'
