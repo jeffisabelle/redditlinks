@@ -1,7 +1,7 @@
 beautifulsoup4==4.3.2
 codegen==1.0
 Django==1.8.1
-django-anymail==0.1
+django-anymail==0.6
 django-debug-toolbar==1.4
 django-extensions==1.5.2
 django-htmlmin==0.7.0
@@ -19,7 +19,7 @@ psycopg2==2.6
 pycrypto==2.6.1
 python-dateutil==2.4.2
 pytz==2015.2
-requests==2.9.1
+requests==2.11.1
 selenium==2.45.0
 six==1.10.0
 sqlparse==0.1.19
