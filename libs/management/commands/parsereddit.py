@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     args = '<subreddit1 subreddit2 ...>'
-    help = 'Closes the specified poll for voting'
 
     BASE = "https://www.reddit.com"
     LIST = "/top/"
