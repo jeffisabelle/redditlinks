@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     args = '<subreddit1 subreddit2 ...>'
-    help = 'Closes the specified poll for voting'
 
     BASE = "https://www.reddit.com"
     LIST = "/top/"
@@ -24,6 +23,13 @@ class Command(BaseCommand):
 
     def _create_parse_url(self, subreddit):
         return "%s%s%s%s" % (self.BASE, subreddit, self.LIST, self.FORMAT)
+
+    def normalize_urls(self, url):
+        """
+        make urls openable, &amp; creates trouble between reddit upload
+        and gmail.
+        """
+        return url.replace("&amp;", "&")
 
     def _parse_links(self):
         subs = Subreddit.objects.all()
@@ -48,7 +54,7 @@ class Command(BaseCommand):
 
                         if created:
                             obj.title = item["title"]
-                            obj.url = item["url"]
+                            obj.url = self.normalize_urls(item["url"])
                             obj.domain = item["domain"]
                             obj.score = item["score"]
                             obj.comments_count = item['num_comments']

@@ -4,9 +4,9 @@ from datetime import datetime
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.template import Template, Context
 
 from subs.models import RedditLink
-from django.template import Context
 
 
 class MailLib(object):
@@ -42,6 +42,27 @@ class MailLib(object):
         send_mail(title, text_content, from_mail, to,
                   html_message=html_content)
 
+    def make_html_from_mjml(self, context, member, template):
+        """
+        not using this anymore as it creates too many processes.
+        probably related w django-mjml version.
+        """
+        template_file = "email/daily.mjml"
+
+        if template == "weekly":
+            template_file = "email/weekly.mjml"
+
+        mjml_content = render_to_string(template_file, context)
+        mjml_before = "{% load mjml %}{% mjml %}"
+        mjml_after = "{% endmjml %}"
+        mjml_content = mjml_before + mjml_content + mjml_after
+
+        # context already passed while bulding mjml
+        new_context = Context()
+
+        html_template = Template(mjml_content)
+        return html_template.render(new_context)
+
     def send_weekly_mail(self, context, member):
         if datetime.now(pytz.utc).isoweekday() != 1:
             """only send weekly mails at mondays, return otherwise"""
@@ -49,6 +70,7 @@ class MailLib(object):
 
         today = datetime.now().strftime('%d %b %Y')
         title = 'Weekly Reddit Links - %s' % today
+        # html_content = self.make_html_from_mjml(context, member, "daily")
         html_content = render_to_string('email/weekly.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
@@ -56,6 +78,7 @@ class MailLib(object):
     def send_daily_mail(self, context, member):
         today = datetime.now().strftime('%d %b %Y')
         title = 'Daily Reddit Links - %s' % today
+        # html_content = self.make_html_from_mjml(context, member, "weekly")
         html_content = render_to_string('email/daily.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])

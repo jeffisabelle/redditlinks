@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 
     # 3rd-parties
     'djrill',
+    'anymail',
     'django_nose',
 
     # apps
@@ -155,9 +156,9 @@ LOGGING = {
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'logs')
 
-# EMAIL MANDRILL BACKEND
-MANDRILL_API_KEY = "mandrill-key"
-EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+# ANYMAIL BACKEND
+ANYMAIL = {"MAILGUN_API_KEY": "mailgun-key"}
+EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
 
 # Integrate with nose
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
