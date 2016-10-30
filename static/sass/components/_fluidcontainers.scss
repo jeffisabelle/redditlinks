@@ -1,7 +1,7 @@
 .fluid {
   padding-top: 80px;
   padding-bottom: 80px;
-  margin: 40px auto;
+  /* margin: 40px auto; */
 
   &.gray {
     background-color: #E5E5E5;
@@ -9,5 +9,9 @@
 
   &.blue {
     background-color: #AABADC;
+  }
+
+  &.brown {
+    background-color: #FCEDCC;
   }
 }

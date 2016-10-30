@@ -100,13 +100,17 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
 
 .features {
   text-align: left;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 300;
   padding: 50px;
 }
 .features h3 {
   font-weight: 500;
   padding-bottom: 20px;
+  font-size: 1.5em;
+}
+.features a {
+  color: #111;
 }
 .features ul {
   margin: 0;
@@ -115,6 +119,10 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
 }
 .features ul li {
   padding: 8px 0px;
+}
+.features ul li a {
+  font-weight: 400;
+  color: #111;
 }
 
 .action-icon {
@@ -200,11 +208,14 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
 .fluid {
   padding-top: 80px;
   padding-bottom: 80px;
-  margin: 40px auto;
+  /* margin: 40px auto; */
 }
 .fluid.gray {
   background-color: #E5E5E5;
 }
 .fluid.blue {
   background-color: #AABADC;
+}
+.fluid.brown {
+  background-color: #FCEDCC;
 }

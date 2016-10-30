@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-  <div class="container">
+  <div class="container" style="margin-bottom: 60px;">
     <div class="row">
       <div class="col-md-12">
         <div class="block">
@@ -14,7 +14,7 @@
   </div>
 
 
-  <div class="container-fluid fluid gray" style="margin-bottom: 0;">
+  <div class="container-fluid fluid gray">
     <div class="row flex">
 
       <div class="col-md-6 flex">
@@ -40,7 +40,7 @@
     </div> <!-- /row -->
   </div>
 
-  <div class="container-fluid fluid blue" style="margin-top: 0;">
+  <div class="container-fluid fluid blue">
     <div class="row flex">
       <div class="col-md-6 flex">
         <div class="features">
@@ -48,7 +48,12 @@
           <ul>
             <li>Get your mails everyday around 8 A.M. <br/>
               or, every monday morning if you wish.</li>
-            <li>See the example mail, </li>
+            <li>
+              See the <a href="/example-mail/">example e-mail</a>, which includes, <br/>
+              best of programming, woahdudue, startups, worldnews<br/>
+              explainlikeimfive, and dataisbeautiful
+              for the last week.
+            </li>
           </ul>
         </div>
       </div>
@@ -58,6 +63,16 @@
           <img alt="" src="/static/img/example.png" width="600px"/>
         </div>
       </div> <!-- /col-md-6 -->
+    </div><!-- /row-flex -->
+  </div> <!-- /container-fluid -->
+
+  <div class="container-fluid fluid brown">
+    <div class="row">
+      <div class="col-md6 block">
+        registeration is closed for now. <br/>
+        please check back a little bit later
+      </div>
     </div>
   </div>
+
 {% endblock %}
