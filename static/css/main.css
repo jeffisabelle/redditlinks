@@ -103,6 +103,7 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
   font-size: 1em;
   font-weight: 300;
   padding: 50px;
+  width: 90%;
 }
 .features h3 {
   font-weight: 500;
