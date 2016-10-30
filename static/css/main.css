@@ -35,13 +35,28 @@ html #content, body #content {
   font-size: 1.2em;
 }
 html a, body a {
+  outline: 0;
   color: #FF4500;
 }
-html a:hover, body a:hover {
+html a:hover, html a:active, html a:focus, body a:hover, body a:active, body a:focus {
   color: #FF4500;
+  outline: 0;
 }
 html .primary-color, body .primary-color {
   color: #FF4500;
+}
+html .flex.row, body .flex.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: lex;
+  flex-wrap: wrap;
+}
+html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -50,6 +65,7 @@ html .primary-color, body .primary-color {
   /* background-color: #eee; */
   border-bottom: 7px solid #FDFDFD;
   /* margin-bottom: 30px; */
+  text-align: center;
 }
 .header .logo-wrapper img.logo {
   margin: 30px auto;
@@ -64,15 +80,49 @@ html .primary-color, body .primary-color {
   padding-top: 30px;
   /* background-color: $white; */
   /* border-top: 10px solid #eee; */
-  background-color: #eee;
+  /* background-color: #eee; */
   border-top: 10px solid #FDFDFD;
   font-weight: 700;
+  font-size: 0.8em;
   color: #0A0A0A;
 }
 
 .card {
   padding: 30px 40px;
   border-left: 7px solid #525252;
+}
+
+.block {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.features {
+  text-align: left;
+  font-size: 1em;
+  font-weight: 300;
+  padding: 50px;
+}
+.features h3 {
+  font-weight: 500;
+  padding-bottom: 20px;
+  font-size: 1.5em;
+}
+.features a {
+  color: #111;
+}
+.features ul {
+  margin: 0;
+  padding: 0;
+  /* list-style-type: none; */
+}
+.features ul li {
+  padding: 8px 0px;
+}
+.features ul li a {
+  font-weight: 400;
+  color: #111;
 }
 
 .action-icon {
@@ -153,4 +203,19 @@ html .primary-color, body .primary-color {
     padding: 3px 7px;
     font-size: 1.4em;
   }
+}
+
+.fluid {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  /* margin: 40px auto; */
+}
+.fluid.gray {
+  background-color: #E5E5E5;
+}
+.fluid.blue {
+  background-color: #AABADC;
+}
+.fluid.brown {
+  background-color: #FCEDCC;
 }

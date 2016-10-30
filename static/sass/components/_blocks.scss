@@ -1,0 +1,36 @@
+.block {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.features {
+  text-align: left;
+  font-size: 1em;
+  font-weight: 300;
+  padding: 50px;
+
+  h3 {
+    font-weight: 500;
+    padding-bottom: 20px;
+    font-size: 1.5em;
+  }
+
+  a {
+    color: #111;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    /* list-style-type: none; */
+    li {
+      padding: 8px 0px;
+
+      a {
+        font-weight: 400;
+        color: #111;
+      }
+    }
+  }
+}

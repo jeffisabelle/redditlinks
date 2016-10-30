@@ -14,9 +14,8 @@ class ExampleMail(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ExampleMail, self).get_context_data(**kwargs)
-        # context['latest_articles'] = Article.objects.all()[:5]
-        member = Member.objects.get(email='muhitosan@gmail.com')
-        context['member'] = member
+        member = Member.objects.get(email='example@example.com')
+        # context['member'] = member
         context['data'] = {}
         context['host'] = settings.HOST
 
@@ -25,7 +24,7 @@ class ExampleMail(TemplateView):
             limit = subscription.count
             title = subscription.subreddit
             qs_filter = {'subreddit__title': title}
-            links = RedditLink.objects.filter(**qs_filter)[:limit]
+            links = RedditLink.weekly_links.filter(**qs_filter)[:limit]
             context['data'][title] = links
 
         return context

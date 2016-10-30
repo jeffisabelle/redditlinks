@@ -1,24 +1,78 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-  <div class="container">
+  <div class="container" style="margin-bottom: 60px;">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="block">
+          do you hate missing top
+          <span class="primary-color">reddit</span> content <br/>
+          from your <span class="primary-color">favourite</span> subreddits?
+        </div>
+      </div> <!-- /col-xs-12 -->
+    </div> <!-- /row -->
+  </div>
 
-        <div class="card">
-          Sorry! <br/>
-          We are not there yet! <br/><br/>
 
-          We work really hard to let people <br/>
-          use reddit.cool as soon as possible. <br/> <br/>
+  <div class="container-fluid fluid gray">
+    <div class="row flex">
 
-          If you want to say anything, <br/>
-          shot us an email to <br/>
-          <span class="primary-color">contact@reddit.cool</span>
+      <div class="col-md-6 flex">
+        <div class="block">
+          <img alt="" src="/static/img/setup.png" width="600px"/>
+        </div>
+      </div> <!-- /col-md-6 -->
+
+
+      <div class="col-md-6 flex">
+        <div class="features">
+          <h3>Setup your account</h3>
+          <ul>
+            <li>Select subreddits you love</li>
+            <li>Set how many links you want from each subreddit</li>
+            <li>Manage your selected subreddits</li>
+            <li>Change mail period as daily or weekly anytime</li>
+          </ul>
         </div>
 
-      </div> <!-- /col-xs-6 -->
+        <!-- explain setup -->
+      </div>
     </div> <!-- /row -->
-
   </div>
+
+  <div class="container-fluid fluid blue">
+    <div class="row flex">
+      <div class="col-md-6 flex">
+        <div class="features">
+          <h3>Enjoy your mails</h3>
+          <ul>
+            <li>Get your mails everyday around 8 A.M. <br/>
+              or, every monday morning if you wish.</li>
+            <li>
+              See the <a href="/example-mail/">example e-mail</a>, which includes, <br/>
+              best of programming, woahdudue, startups, worldnews<br/>
+              explainlikeimfive, and dataisbeautiful
+              for the last week.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="block">
+          <img alt="" src="/static/img/example.png" width="600px"/>
+        </div>
+      </div> <!-- /col-md-6 -->
+    </div><!-- /row-flex -->
+  </div> <!-- /container-fluid -->
+
+  <div class="container-fluid fluid brown">
+    <div class="row">
+      <div class="col-md6 block">
+        registeration is closed for now. <br/>
+        please check back a little bit later
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

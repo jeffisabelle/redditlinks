@@ -1,14 +1,14 @@
 .header {
-    /* background-color: $white; */
-    /* border-bottom: 7px solid #eee; */
-    /* background-color: #eee; */
-    border-bottom: 7px solid $white;
+  /* background-color: $white; */
+  /* border-bottom: 7px solid #eee; */
+  /* background-color: #eee; */
+  border-bottom: 7px solid $white;
+  /* margin-bottom: 30px; */
+  text-align: center;
 
-    /* margin-bottom: 30px; */
-
-    .logo-wrapper {
-        img.logo {
-            margin: 30px auto;
-        }
+  .logo-wrapper {
+    img.logo {
+      margin: 30px auto;
     }
+  }
 }
