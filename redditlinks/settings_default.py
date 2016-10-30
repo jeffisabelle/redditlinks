@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'djrill',
     'anymail',
     'django_nose',
-    'mjml',
 
     # apps
     'members',
