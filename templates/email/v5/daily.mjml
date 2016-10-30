@@ -16,66 +16,48 @@
           </mj-text>
         </mj-column>
       </mj-section>
-
+        
       <mj-section background-color="#ffffff" padding="0px">
         <mj-column width="100%" vertical-align="top">
           <mj-divider border-width="1px" width="100%" border-style="solid" padding="0 5px" border-color="#d05424"></mj-divider>
         </mj-column>
-      </mj-section>
+      </mj-section> 
 
-      {% for subreddit, links in data.iteritems %}
       <mj-section background-color="#ffffff" padding="0 10px">
         <mj-column width="100%" vertical-align="top">
-          <!-- SUBREDDIT -->
-          <mj-text
-            align="left" color="#000000"
+          <mj-text align="left" color="#000000" 
             font-family="Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif"
             font-size="13" padding="10px 0px 0px 0px">
-            <p><a href="https://reddit.com{{subreddit|lower}}" style="text-decoration:none;">
+            <p><a href="https://reddit.com/r/programming" style="text-decoration:none;">
               <span style="color: #d05424;"><span style="font-size: 26px;">
-                {{subreddit|lower}}
+                /r/programming
               </span></span></a>
             </p>
           </mj-text>
         </mj-column>
-
-        {% for link in links %}
+          
         <mj-column width="100%">
-          <!-- LINK -->
-          <mj-text
-            align="left"
-            font-weight="bold"
-            font-size="16"
-            color="#333"
-            padding="0px 0 0px 0px">
-            <a href="{{ link.url }}" style="text-decoration:none;">
-              <span style="color: #333;">
-                {{link.title | safe}}</span></a>
+          <mj-text font-weight="bold" font-size="16" color="#333" padding="0">
+            <a href="https://reddit.com/r/titlelink" style="text-decoration:none;">
+              <span style="color: #333;">               
+            Pyramid has new website</span></a>
           </mj-text>
-        </mj-column>
-
+        </mj-column>  
+          
         <mj-column width="100%">
-          <!-- VOTE/COMMENTS -->
-          <mj-text
-            align="left"
-            font-weight="300"
-            font-size="12"
-            padding="0px 0px 10px 0px">
-            <a href="{{link.comments_permalink}}" style="text-decoration:none;"><span style="color: #333;">
-              {{link.score}} votes - {{link.comments_count}} comments</span></a>
+          <mj-text font-weight="300" font-size="12" padding="0px 0px 10px 0px">
+            <a href="https://reddit.com/r/commentlink" style="text-decoration:none;"><span style="color: #333;"> 
+            156 votes - 33 comments</span></a>              
           </mj-text>
-        </mj-column>
-        {% endfor %}
-
+        </mj-column>           
       </mj-section>
-      {% endfor %}
 
       <mj-section background-color="#ffffff" padding="0px">
         <mj-column width="100%" vertical-align="top">
           <mj-divider border-width="1px" width="100%" border-style="solid" padding="0 5px" border-color="#d05424"></mj-divider>
         </mj-column>
       </mj-section>
-
+        
       <mj-section background-color="#ffffff" padding-bottom="20" padding-top="0">
         <mj-column width="100%" vertical-align="top">
           <mj-text align="center" color="#000000" font-family="Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif" font-size="13" padding-left="25" padding-right="25" padding-bottom="0" padding-top="10">
@@ -83,7 +65,7 @@
           </mj-text>
         </mj-column>
       </mj-section>
-
+      
       <mj-section background-color="#ffffff" padding-bottom="20" padding-top="0">
         <!-- <mj-column width="10%" vertical-align="top"></mj-column> -->
         <mj-column width="35%">
@@ -96,15 +78,16 @@
             Switch Weekly Mails
           </mj-button>
         </mj-column>
-
+     
         <mj-column width="100%">
           <mj-text align="center" color="#000000" font-family="Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif" font-size="13" padding-left="25" padding-right="25" padding-bottom="20" padding-top="10">
-            <p style="color: #666">If you don't like the e-mails, you can always <a href="{{host}}members/unsubscribe?member={{member.member_uuid}}&token={{member.member_token}}" style="text-decoration:none;"><span style="color: #333;">unsubscribe.</span></a></p>
+            <p style="color: #666">If you don't like the e-mails, you can always 
+            <a href="{{host}}members/unsubscribe?member={{member.member_uuid}}&token={{member.member_token}}" style="text-decoration:none;"><span style="color: #333;"> unsubscribe.</span></a></p>
           </mj-text>
         </mj-column>
-
+        
       </mj-section>
-
+              
     </mj-container>
   </mj-body>
 </mjml>
