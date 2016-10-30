@@ -1,33 +1,52 @@
 html, body {
-    height: 100%;
+  height: 100%;
+  min-height: 100%;
+  /* background-color: $base-background-color; */
+  background-color: $white;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+
+  @media (max-width: 1200px) {font-size: 14px;}
+  @media (max-width: 1000px) {font-size: 14px;}
+  @media (max-width: 800px) {font-size: 12px;}
+
+  font-weight: $bold;
+  color: $base-text-color;
+
+  #content {
+    height: auto;
     min-height: 100%;
-    /* background-color: $base-background-color; */
-    background-color: $white;
-    font-family: $base-font-family;
-    font-size: $base-font-size;
+    padding-bottom: $footer-height;
+    font-size: $large-font-size;
+  }
 
-    @media (max-width: 1200px) {font-size: 14px;}
-    @media (max-width: 1000px) {font-size: 14px;}
-    @media (max-width: 800px) {font-size: 12px;}
+  a {
+    outline: 0;
+    color: $primary-color;
+    &:hover, &:active, &:focus {
+      color: $primary-color;
+      outline: 0;
+    }
+  }
 
-    font-weight: $bold;
-    color: $base-text-color;
+  .primary-color {color: $primary-color;}
 
-    #content {
-        height: auto;
-        min-height: 100%;
-        padding-bottom: $footer-height;
-        font-size: $large-font-size;
+
+  .flex {
+    &.row {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: lex;
+      flex-wrap: wrap;
     }
 
-    a {
-        outline: 0;
-        color: $primary-color;
-        &:hover, &:active, &:focus {
-            color: $primary-color;
-            outline: 0;
-        }
+    &.row > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
+  }
 
-    .primary-color {color: $primary-color;}
 }

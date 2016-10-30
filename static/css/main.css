@@ -45,6 +45,19 @@ html a:hover, html a:active, html a:focus, body a:hover, body a:active, body a:f
 html .primary-color, body .primary-color {
   color: #FF4500;
 }
+html .flex.row, body .flex.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: lex;
+  flex-wrap: wrap;
+}
+html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .header {
   /* background-color: $white; */
@@ -52,8 +65,6 @@ html .primary-color, body .primary-color {
   /* background-color: #eee; */
   border-bottom: 7px solid #FDFDFD;
   /* margin-bottom: 30px; */
-}
-.header .logo-wrapper {
   text-align: center;
 }
 .header .logo-wrapper img.logo {
@@ -69,7 +80,7 @@ html .primary-color, body .primary-color {
   padding-top: 30px;
   /* background-color: $white; */
   /* border-top: 10px solid #eee; */
-  background-color: #eee;
+  /* background-color: #eee; */
   border-top: 10px solid #FDFDFD;
   font-weight: 700;
   font-size: 0.8em;
@@ -83,8 +94,27 @@ html .primary-color, body .primary-color {
 
 .block {
   text-align: center;
-  font-size: 1.7em;
-  font-weight: normal;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.features {
+  text-align: left;
+  font-size: 1.1em;
+  font-weight: 300;
+  padding: 50px;
+}
+.features h3 {
+  font-weight: 500;
+  padding-bottom: 20px;
+}
+.features ul {
+  margin: 0;
+  padding: 0;
+  /* list-style-type: none; */
+}
+.features ul li {
+  padding: 8px 0px;
 }
 
 .action-icon {
@@ -165,4 +195,16 @@ html .primary-color, body .primary-color {
     padding: 3px 7px;
     font-size: 1.4em;
   }
+}
+
+.fluid {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin: 40px auto;
+}
+.fluid.gray {
+  background-color: #E5E5E5;
+}
+.fluid.blue {
+  background-color: #AABADC;
 }

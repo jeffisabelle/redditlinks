@@ -1,16 +1,16 @@
 .footer {
-    clear: both;
-    position: relative;
-    z-index: 10;
-    height: $footer-height;
-    margin-top: -$footer-height;
-    padding-top: 30px;
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: $footer-height;
+  margin-top: -$footer-height;
+  padding-top: 30px;
 
-    /* background-color: $white; */
-    /* border-top: 10px solid #eee; */
-    background-color: #eee;
-    border-top: 10px solid $white;
-    font-weight: $bold;
-    font-size: 0.8em;
-    color: $black;
+  /* background-color: $white; */
+  /* border-top: 10px solid #eee; */
+  /* background-color: #eee; */
+  border-top: 10px solid $white;
+  font-weight: $bold;
+  font-size: 0.8em;
+  color: $black;
 }
