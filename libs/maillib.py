@@ -43,6 +43,10 @@ class MailLib(object):
                   html_message=html_content)
 
     def make_html_from_mjml(self, context, member, template):
+        """
+        not using this anymore as it creates too many processes.
+        probably related w django-mjml version.
+        """
         template_file = "email/daily.mjml"
 
         if template == "weekly":
@@ -66,16 +70,16 @@ class MailLib(object):
 
         today = datetime.now().strftime('%d %b %Y')
         title = 'Weekly Reddit Links - %s' % today
-        html_content = self.make_html_from_mjml(context, member, "daily")
-        # html_content = render_to_string('email/weekly.html', context)
+        # html_content = self.make_html_from_mjml(context, member, "daily")
+        html_content = render_to_string('email/weekly.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 
     def send_daily_mail(self, context, member):
         today = datetime.now().strftime('%d %b %Y')
         title = 'Daily Reddit Links - %s' % today
-        html_content = self.make_html_from_mjml(context, member, "weekly")
-        # html_content = render_to_string('email/daily.html', context)
+        # html_content = self.make_html_from_mjml(context, member, "weekly")
+        html_content = render_to_string('email/daily.html', context)
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 
