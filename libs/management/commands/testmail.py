@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def get_members(self):
         member_filter = {
             "is_active": True,
-            "email": "muhammet.can@sony.com"
+            "email": "muhitosan@gmail.com"
         }
         return Member.objects.filter(**member_filter)
 
