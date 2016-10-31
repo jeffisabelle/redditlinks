@@ -20,11 +20,10 @@ gulp.task('react', function () {
         .pipe(gulp.dest('./static/js/'));
 });
 
-gulp.task('concat', function() {
-    return gulp.src(['./static/js/preferences.js', './static/js/main.js'])
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('./static/js/'));
-});
+// gulp.task('concat', function() {
+//     return gulp.src(['./static/js/preferences.js', './static/js/main.js'])
+//         .pipe(gulp.dest('./static/js/'));
+// });
 
 gulp.task('watch', function () {
     var watcher_sass = gulp.watch('./static/sass/**/*.scss', ['sass']);
@@ -37,8 +36,8 @@ gulp.task('watch', function () {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 
-    var watcher_concat = gulp.watch(['./static/js/**/*.js'], ['concat']);
-    watcher_concat.on('change', function(event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    })
+    // var watcher_concat = gulp.watch(['./static/js/**/*.js'], ['concat']);
+    // watcher_concat.on('change', function(event) {
+    //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    // })
 });

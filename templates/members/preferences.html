@@ -21,13 +21,11 @@
 {% endblock %}
 
 {% block "jsimports" %}
-  <!-- include javascripts -->
   <script type="text/javascript">
    var member = {
      "email": "{{member.email}}",
      "member_uuid": "{{member.member_uuid}}"
    };
   </script>
-  {{ block.super }}
-
+  <script type="text/javascript" src="/static/js/preferences.js"></script>
 {% endblock %}

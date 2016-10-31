@@ -335,3 +335,10 @@ $.get("/subs/subreddits/json/", function(response) {
         source: substringMatcher(response["subreddits"])
     })
 });
+
+
+$(document).ready ( function(){
+    var tz = jstz.determine();
+    console.log("hedeee");
+    console.log(tz.name());
+});
