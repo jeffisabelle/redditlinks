@@ -45,19 +45,6 @@ html a:hover, html a:active, html a:focus, body a:hover, body a:active, body a:f
 html .primary-color, body .primary-color {
   color: #FF4500;
 }
-html .flex.row, body .flex.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: lex;
-  flex-wrap: wrap;
-}
-html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .header {
   /* background-color: $white; */
@@ -126,6 +113,20 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
   color: #111;
 }
 
+.flex.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: lex;
+  flex-wrap: wrap;
+}
+.flex.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .action-icon {
   padding: 8px 13px;
   cursor: pointer;
@@ -144,7 +145,7 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
   background-color: #fff;
 }
 
-.preference-form .form-control {
+.preference-form .form-control, register-form .form-control {
   max-width: 250px;
   display: inline-block;
   padding: 5px 10px;
@@ -152,14 +153,31 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
   vertical-align: middle;
   outline: none;
 }
-.preference-form .select-box {
+.preference-form .select-box, register-form .select-box {
   width: 130px;
   display: inline-block;
   padding: 5px 15px;
 }
-.preference-form .btn i {
+.preference-form .btn i, register-form .btn i {
   font-size: 0.7em;
   padding: 0 5px;
+}
+
+.register-form .register-form-elem > .btn, .register-form .register-form-elem input {
+  width: 100%;
+  max-width: 100%;
+}
+.register-form .form-label {
+  width: 100%;
+  text-align: left;
+  font-size: 0.5em;
+  font-weight: 600;
+}
+.register-form .form-control {
+  margin: 0;
+}
+.register-form h2 {
+  margin: 0 0 40px auto;
 }
 
 .empty {
@@ -204,6 +222,83 @@ html .flex.row > [class*='col-'], body .flex.row > [class*='col-'] {
     padding: 3px 7px;
     font-size: 1.4em;
   }
+}
+
+/* on-off switch */
+.onoffswitch {
+  position: relative;
+  width: 100px;
+  margin: 5px 0 10px 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+  content: "Daily";
+  /* padding-left: 10px; */
+  background-color: #AABADC;
+  color: #FFFFFF;
+  text-align: center;
+}
+.onoffswitch-inner:after {
+  content: "Weekly";
+  padding-left: 10px;
+  background-color: #EEEEEE;
+  color: #999999;
+  text-align: center;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 70px;
+  border: 1px solid #999999;
+  border-radius: 5px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
 }
 
 .fluid {
