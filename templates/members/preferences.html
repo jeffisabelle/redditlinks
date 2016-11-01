@@ -21,6 +21,9 @@
 {% endblock %}
 
 {% block "jsimports" %}
+
+  {{ block.super }}
+
   <script type="text/javascript">
    var member = {
      "email": "{{member.email}}",
@@ -28,4 +31,5 @@
    };
   </script>
   <script type="text/javascript" src="/static/js/preferences.js"></script>
+
 {% endblock %}

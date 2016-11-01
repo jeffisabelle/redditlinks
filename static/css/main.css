@@ -177,7 +177,10 @@ html .primary-color, body .primary-color {
   margin: 0;
 }
 .register-form h2 {
-  margin: 0 0 40px auto;
+  margin: 0;
+}
+.register-form p {
+  font-size: 0.4em;
 }
 
 .empty {
