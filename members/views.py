@@ -2,6 +2,7 @@ import json
 import urllib
 
 from members.models import Member, Subscription, MemberSubscription
+from libs.maillib import MailLib
 from subs.models import Subreddit
 
 from django.views.decorators.csrf import csrf_exempt
@@ -26,6 +27,11 @@ class MemberUpdateView(View):
 
     def unsubscribe(self, member):
         member.is_active = False
+        member.save()
+        return member
+
+    def activate(self, member):
+        member.is_active = True
         member.save()
         return member
 
@@ -69,6 +75,35 @@ class Unsubscribe(TemplateView, MemberUpdateView):
 
         context['member'] = member
         context['host'] = settings.HOST
+        return context
+
+
+class Activate(TemplateView, MemberUpdateView):
+    template_name = 'members/activate.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Activate, self).get_context_data(**kwargs)
+
+        member = self.get_member()
+        self.activate(member)
+
+        context['member'] = member
+        context['host'] = settings.HOST
+        return context
+
+
+class Complete(TemplateView, MemberUpdateView):
+    template_name = 'members/complete-registeration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Complete, self).get_context_data(**kwargs)
+
+        member = self.get_member()
+        context['member'] = member
+        context['host'] = settings.HOST
+        ml = MailLib()
+        ml.send_activation_mail(context, member)
+
         return context
 
 

@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-  <div class="container">
+  <div class="container-fluid fluid brown">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
 
-        <div class="card">
+        <div style="text-align:center;">
+
+
           hello there <br/>
           {{member.email}}
           <br/><br/>
@@ -13,9 +15,9 @@
           <br/><br/>
 
           uh oh! if you clicked that button accidentally
-          you can move back to
-          <a href="{{host}}members/todaily?member={{member.member_uuid}}&token={{member.member_token}}">
-            daily subscription.</a>
+          you can move back to <br/>
+          <a href="{{host}}members/todaily?member={{member.member_uuid}}&token={{member.member_token}}">daily subscription.</a>
+
         </div>
 
       </div> <!-- /col-xs-6 -->
