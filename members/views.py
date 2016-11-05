@@ -1,4 +1,5 @@
 import json
+import urllib
 
 from members.models import Member, Subscription, MemberSubscription
 from subs.models import Subreddit
@@ -8,6 +9,8 @@ from django.views.generic.base import TemplateView, View
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 class MemberUpdateView(View):
@@ -80,6 +83,10 @@ class PreferencesView(TemplateView, MemberUpdateView):
         return context
 
 
+class PreferencesRegisterationView(PreferencesView):
+    template_name = 'members/preferences-registeration.html'
+
+
 class PreferencesUpdateView(MemberUpdateView):
     """
     dont use csrf_exampt, pass csrf to the template
@@ -122,3 +129,33 @@ class PreferencesUpdateView(MemberUpdateView):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(PreferencesUpdateView, self).dispatch(*args, **kwargs)
+
+
+class Register(View):
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+        email = data.get("email")
+        dwswitch = data.get("dailyweeklyswitch")
+        timezone = data.get("timezone")
+
+        if dwswitch == "on":
+            switch = "d"
+        else:
+            switch = "w"
+
+        member, created = Member.objects.get_or_create(
+            email=email, rate=switch, timezone=timezone)
+
+        if not created:
+            print "user already registered"
+            return redirect("/")
+
+        params = {
+            "member": member.member_uuid,
+            "token": member.member_token,
+            "registeration": "yes"
+        }
+        params = urllib.urlencode(params)
+        path = reverse("preferences-register") + "?" + params
+
+        return redirect(path)

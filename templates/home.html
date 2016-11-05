@@ -14,7 +14,7 @@
   </div>
 
 
-  <div class="container-fluid fluid gray">
+  <div class="container-fluid fluid blue">
     <div class="row flex">
 
       <div class="col-md-6 flex">
@@ -26,7 +26,7 @@
 
       <div class="col-md-6 flex">
         <div class="features">
-          <h3>Setup your account</h3>
+          <h3>1- Setup your account</h3>
           <ul>
             <li>Select subreddits you love</li>
             <li>Set how many links you want from each subreddit</li>
@@ -39,11 +39,11 @@
     </div> <!-- /row -->
   </div>
 
-  <div class="container-fluid fluid blue">
+  <div class="container-fluid fluid gray">
     <div class="row flex">
       <div class="col-md-6 flex">
         <div class="features">
-          <h3>Enjoy your mails</h3>
+          <h3>2- Enjoy your mails</h3>
           <ul>
             <li>
               Get your mails every morning, or, every monday
@@ -75,52 +75,57 @@
           <div class="register-form">
             <h2>Subscribe Now</h2>
             <p>we don't do stupid stuff with your e-mail address.</p>
-            <div class="row">
-              <div class="col-md-12">
-                <!-- email -->
-                <div class="register-form-elem">
-                  <label class="form-label" for="email">E-mail</label>
-                  <input type="text" class="form-control" id="email"
-                         placeholder="yourname@example.com" />
-                </div>
-              </div>
 
-              <div class="col-md-4">
-                <!-- on-off -->
-                <div class="register-form-elem">
+
+            <div class="row">
+
+              <form action="members/register/" method="post">
+                {% csrf_token %}
+                <div class="col-md-12">
+                  <!-- email -->
+                  <div class="register-form-elem">
+                  <label class="form-label" for="email">E-mail</label>
+                  <input type="text" class="form-control" id="email" name="email"
+                         placeholder="yourname@example.com" />
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <!-- on-off -->
+                  <div class="register-form-elem">
                   <label class="form-label" for="email">Receive Period</label>
                   <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <input type="checkbox" name="dailyweeklyswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                     <label class="onoffswitch-label" for="myonoffswitch">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                     </label>
                   </div>
                 </div>
-              </div>
+                </div>
 
-              <div class="col-md-8">
-                <!-- timezone -->
-                <div class="register-form-elem">
+                <div class="col-md-8">
+                  <!-- timezone -->
+                  <div class="register-form-elem">
                   <label class="form-label" for="email">Timezone *</label>
                   <input type="text" class="form-control" id="timezone"
                          name="timezone" placeholder="your/timezone" />
+                  </div>
                 </div>
 
-              </div>
+                <div class="col-md-12">
+                  <div class="register-form-elem">
+                    <input type="submit" value="Select Subreddits" class="btn btn-default"/>
+                  </div>
+                </div>
 
-              <div class="col-md-12">
-                <!-- select subreddits -->
-              </div>
-            </div>
+                <div class="col-md-12">
+                  <p style="margin-top: 20px;">* you will receive your mails around 8 AM according to your timezone</p>
+                </div>
 
+              </form>
 
-            <div class="register-form-elem">
-              <button class="btn btn-default" role="button">
-                Select Subreddits<i class="fa fa-angle-right"></i>
-              </button>
-            </div>
-            <p style="margin-top: 20px;">* you will receive your mails around 8 AM according to your timezone</p>
+            </div> <!-- /row -->
           </div><!-- /.register-form -->
 
 
