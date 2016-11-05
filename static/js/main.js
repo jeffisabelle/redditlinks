@@ -31,3 +31,11 @@ $.get("/subs/subreddits/json/", function(response) {
         source: substringMatcher(response["subreddits"])
     })
 });
+
+
+$(document).ready ( function(){
+    var tz = jstz.determine();
+    var tz_name = tz.name();
+
+    $("#timezone").val(tz_name);
+});

@@ -83,6 +83,13 @@ class MailLib(object):
         text_content = render_to_string('email/template.txt', context)
         self.sendmail(title, text_content, html_content, [member.email])
 
+    def send_activation_mail(self, context, member):
+        title = 'Welcome to reddit.cool newsletter'
+        # html_content = self.make_html_from_mjml(context, member, "weekly")
+        html_content = render_to_string('email/activation.html', context)
+        text_content = render_to_string('email/template.txt', context)
+        self.sendmail(title, text_content, html_content, [member.email])
+
     def process(self, member):
         ctx = self.build_context(member)
         context = Context(ctx)

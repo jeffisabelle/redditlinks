@@ -1,6 +1,8 @@
 import json
+import urllib
 
 from members.models import Member, Subscription, MemberSubscription
+from libs.maillib import MailLib
 from subs.models import Subreddit
 
 from django.views.decorators.csrf import csrf_exempt
@@ -8,6 +10,8 @@ from django.views.generic.base import TemplateView, View
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 class MemberUpdateView(View):
@@ -23,6 +27,11 @@ class MemberUpdateView(View):
 
     def unsubscribe(self, member):
         member.is_active = False
+        member.save()
+        return member
+
+    def activate(self, member):
+        member.is_active = True
         member.save()
         return member
 
@@ -69,6 +78,35 @@ class Unsubscribe(TemplateView, MemberUpdateView):
         return context
 
 
+class Activate(TemplateView, MemberUpdateView):
+    template_name = 'members/activate.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Activate, self).get_context_data(**kwargs)
+
+        member = self.get_member()
+        self.activate(member)
+
+        context['member'] = member
+        context['host'] = settings.HOST
+        return context
+
+
+class Complete(TemplateView, MemberUpdateView):
+    template_name = 'members/complete-registeration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Complete, self).get_context_data(**kwargs)
+
+        member = self.get_member()
+        context['member'] = member
+        context['host'] = settings.HOST
+        ml = MailLib()
+        ml.send_activation_mail(context, member)
+
+        return context
+
+
 class PreferencesView(TemplateView, MemberUpdateView):
     template_name = 'members/preferences.html'
 
@@ -78,6 +116,10 @@ class PreferencesView(TemplateView, MemberUpdateView):
         context['member'] = member
         context['host'] = settings.HOST
         return context
+
+
+class PreferencesRegisterationView(PreferencesView):
+    template_name = 'members/preferences-registeration.html'
 
 
 class PreferencesUpdateView(MemberUpdateView):
@@ -122,3 +164,33 @@ class PreferencesUpdateView(MemberUpdateView):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(PreferencesUpdateView, self).dispatch(*args, **kwargs)
+
+
+class Register(View):
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+        email = data.get("email")
+        dwswitch = data.get("dailyweeklyswitch")
+        timezone = data.get("timezone")
+
+        if dwswitch == "on":
+            switch = "d"
+        else:
+            switch = "w"
+
+        member, created = Member.objects.get_or_create(
+            email=email, rate=switch, timezone=timezone)
+
+        if not created:
+            print "user already registered"
+            return redirect("/")
+
+        params = {
+            "member": member.member_uuid,
+            "token": member.member_token,
+            "registeration": "yes"
+        }
+        params = urllib.urlencode(params)
+        path = reverse("preferences-register") + "?" + params
+
+        return redirect(path)

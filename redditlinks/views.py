@@ -15,7 +15,7 @@ class ExampleMail(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ExampleMail, self).get_context_data(**kwargs)
         member = Member.objects.get(email='example@example.com')
-        # context['member'] = member
+        context['member'] = member
         context['data'] = {}
         context['host'] = settings.HOST
 

@@ -1,0 +1,21 @@
+.btn {
+  .fa {
+    font-weight: 600;
+    padding: 3px 6px;
+  }
+}
+
+.btn-reddit {
+  color: #fff;
+  background-color: #eb5a33;
+
+  &:focus, &:active {
+    color: #fff;
+    background-color: #eb5a33;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: lighten(#eb5a33, 5%);
+  }
+}
