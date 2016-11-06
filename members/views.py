@@ -19,6 +19,10 @@ class MemberUpdateView(View):
     def get_member(self):
         uuid = self.request.GET['member']
         token = self.request.GET['token']
+
+        if not uuid and not token:
+            return None
+
         return get_object_or_404(Member, member_uuid=uuid, member_token=token)
 
     def update_member_rate(self, member, new_rate):

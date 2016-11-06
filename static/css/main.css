@@ -45,6 +45,9 @@ html a:hover, html a:active, html a:focus, body a:hover, body a:active, body a:f
 html .primary-color, body .primary-color {
   color: #FF4500;
 }
+html .bold, body .bold {
+  font-weight: 700;
+}
 
 .header {
   /* background-color: $white; */
@@ -97,9 +100,6 @@ html .primary-color, body .primary-color {
   padding-bottom: 20px;
   font-size: 1.5em;
 }
-.features a {
-  color: #111;
-}
 .features ul {
   margin: 0;
   padding: 0;
@@ -110,7 +110,6 @@ html .primary-color, body .primary-color {
 }
 .features ul li a {
   font-weight: 400;
-  color: #111;
 }
 
 .flex.row {
@@ -198,7 +197,7 @@ html .primary-color, body .primary-color {
   margin: 0;
 }
 .register-form p {
-  font-size: 0.4em;
+  font-size: 0.5em;
 }
 
 .empty {
