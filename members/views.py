@@ -141,6 +141,22 @@ class PreferencesUpdateView(MemberUpdateView):
     with PreferenceView, then use DJANGO_VARS to save
     it to javascript, then use csrf variable in react.
     """
+    def normalize_subreddit(self, subreddit):
+        """turn every subreddit input to /r/example format"""
+        # remove trailing slash
+        if subreddit.endswith("/"):
+            subreddit = subreddit[:-1]
+
+        # subreddit doesn't start with /r/
+        if not subreddit.startswith("/r/"):
+            subreddit = "/r/" + subreddit
+
+        # subreddit doesn't start with /
+        if not subreddit.startswith("/"):
+            subreddit = "/" + subreddit
+
+        return subreddit
+
     def update_member_subscription(self, member, subreddit, count):
         subreddit, created = Subreddit.objects.get_or_create(title=subreddit)
         subscription, created = Subscription.objects.get_or_create(
@@ -169,6 +185,7 @@ class PreferencesUpdateView(MemberUpdateView):
         MemberSubscription.objects.filter(member=member).delete()
         for data in request:
             subreddit = data["subreddit"]
+            subreddit = self.normalize_subreddit(subreddit)
             count = int(data["count"])
             self.update_member_subscription(member, subreddit, count)
 
