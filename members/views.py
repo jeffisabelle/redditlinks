@@ -5,6 +5,7 @@ from members.models import Member, Subscription, MemberSubscription
 from libs.maillib import MailLib
 from subs.models import Subreddit
 
+import pytz
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView, View
 from django.shortcuts import get_object_or_404
@@ -34,6 +35,14 @@ class MemberUpdateView(View):
         member.is_active = True
         member.save()
         return member
+
+
+class TimezoneList(View):
+    def get(self, request, *args, **kwargs):
+        commons = pytz.common_timezones
+        data = {}
+        data["timezones"] = commons
+        return JsonResponse(data)
 
 
 class ToWeekly(TemplateView, MemberUpdateView):

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from members.views import (
-    ToWeekly, ToDaily, Unsubscribe, Register, PreferencesView,
+    ToWeekly, ToDaily, Unsubscribe, Register, PreferencesView, TimezoneList,
     PreferencesUpdateView, PreferencesRegisterationView, Activate, Complete)
 
 urlpatterns = patterns(
@@ -16,4 +16,6 @@ urlpatterns = patterns(
         name='preferences-register'),
     url(r'^preferences.*/json/$', PreferencesUpdateView.as_view(),
         name='preferences-json'),
+    url(r'^timezones/json/$', TimezoneList.as_view(),
+        name='timezones-json'),
 )

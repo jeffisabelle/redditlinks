@@ -232,6 +232,11 @@ html .primary-color, body .primary-color {
   border-bottom: none;
 }
 
+.twitter-typeahead {
+  text-align: left;
+  width: 100%;
+}
+
 .table {
   font-weight: normal;
 }

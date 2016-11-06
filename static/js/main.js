@@ -21,19 +21,31 @@ var substringMatcher = function(strs) {
 };
 
 
-$.get("/subs/subreddits/json/", function(response) {
-    console.log(response);
-    $('.typeahead').typeahead({
-        minLength: 3,
-        highlight: true
-    }, {
-        name: 'my-dataset',
-        source: substringMatcher(response["subreddits"])
-    })
+$(document).ready(function() {
+    $.get("/subs/subreddits/json/", function(response) {
+        console.log(response);
+        $('.typeahead').typeahead({
+            minLength: 3,
+            highlight: true
+        }, {
+            name: 'my-dataset',
+            source: substringMatcher(response["subreddits"])
+        })
+    });
+
+    $.get("/members/timezones/json/", function(response) {
+        console.log(response);
+        $('.typeahead-timezone').typeahead({
+            minLength: 3,
+            highlight: true
+        }, {
+            name: 'my-dataset2',
+            source: substringMatcher(response["timezones"])
+        })
+    });
 });
 
-
-$(document).ready ( function(){
+$(document).ready(function() {
     var tz = jstz.determine();
     var tz_name = tz.name();
 
