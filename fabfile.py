@@ -1,11 +1,19 @@
 from fabric.api import run, env, cd
 
+host = "aws"
 
-CODE_DIR = '/home/django/redditlinks'
-env.user = 'root'
-env.hosts = ['redditcool']
-env.use_ssh_config = True
-env.forward_agent = True
+if host == "aws":
+    CODE_DIR = '/home/ubuntu/redditlinks'
+    env.user = 'ubuntu'
+    env.hosts = ['reddit-aws']
+    env.use_ssh_config = True
+    env.forward_agent = True
+else:
+    CODE_DIR = '/home/django/redditlinks'
+    env.user = 'root'
+    env.hosts = ['redditcool']
+    env.use_ssh_config = True
+    env.forward_agent = True
 
 
 def stop_gunicorn():
