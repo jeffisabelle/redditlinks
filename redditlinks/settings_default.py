@@ -126,7 +126,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/reddit.logs',
+            'filename': '/var/log/reddit/application.logs',
             'formatter': 'verbose',
         },
         'console': {
