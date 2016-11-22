@@ -8,20 +8,24 @@ if host == "aws":
     env.hosts = ['reddit-aws']
     env.use_ssh_config = True
     env.forward_agent = True
+    gunicorn_stop = "sudo systemctl stop gunicorn"
+    gunicorn_start = "sudo systemctl start gunicorn"
 else:
     CODE_DIR = '/home/django/redditlinks'
     env.user = 'root'
     env.hosts = ['redditcool']
     env.use_ssh_config = True
     env.forward_agent = True
+    gunicorn_stop = "service gunicorn stop"
+    gunicorn_start = "service gunicorn start"
 
 
 def stop_gunicorn():
-    run('service gunicorn stop')
+    run(gunicorn_stop)
 
 
 def start_gunicorn():
-    run('service gunicorn start')
+    run(gunicorn_start)
 
 
 def install_dependencies():
