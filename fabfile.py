@@ -40,7 +40,7 @@ def release():
     with cd(CODE_DIR):
         stop_gunicorn()
         run('git fetch')
-        run('git pull -u origin master')
+        run('git pull')
         install_dependencies()
         migrate()
         start_gunicorn()
