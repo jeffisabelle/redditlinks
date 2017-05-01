@@ -5,6 +5,7 @@ from members.models import Member, Subscription, MemberSubscription
 from libs.maillib import MailLib
 from subs.models import Subreddit
 
+import requests
 import pytz
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView, View
@@ -202,6 +203,19 @@ class Register(View):
         email = data.get("email")
         dwswitch = data.get("dailyweeklyswitch")
         timezone = data.get("timezone")
+        captcha_string = data.get("g-recaptcha-response")
+        captcha_secret = settings.CAPTCHA_SECRET
+
+        # check weather user is verified or not
+        captcha_verifier = "https://www.google.com/recaptcha/api/siteverify"
+        payload = {'secret': captcha_secret, 'response': captcha_string}
+        res = requests.post(captcha_verifier, data=payload)
+        res = res.json()
+
+        # user is not verified
+        if not res["success"]:
+            print "user is not verified"
+            return redirect("/")
 
         if dwswitch == "on":
             switch = "d"

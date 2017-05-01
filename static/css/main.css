@@ -144,6 +144,10 @@ html .bold, body .bold {
   background-color: #fff;
 }
 
+#captcha {
+  margin-bottom: 10px;
+}
+
 .btn .fa {
   font-weight: 600;
   padding: 3px 6px;
