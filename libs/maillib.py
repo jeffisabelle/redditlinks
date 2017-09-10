@@ -22,7 +22,7 @@ class MailLib(object):
             limit = subscription.count
             title = subscription.subreddit
 
-            qs_filter = {'subreddit__title_iexact': title}
+            qs_filter = {'subreddit__title__iexact': title}
             if member.rate == 'd':
                 links = RedditLink.daily_links.filter(**qs_filter)[:limit]
             else:
