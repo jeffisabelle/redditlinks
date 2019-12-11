@@ -9,7 +9,7 @@ class RedditLinkAdmin(admin.ModelAdmin):
 
 
 class SubredditAdmin(admin.ModelAdmin):
-    search_fields = ('subreddit', )
+    search_fields = ('title', )
 
 
 admin.site.register(RedditLink, RedditLinkAdmin)
