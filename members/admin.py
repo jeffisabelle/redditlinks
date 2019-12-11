@@ -5,11 +5,13 @@ from members.models import Member, Subscription, MemberSubscription
 class SubscriptionAdmin(admin.ModelAdmin):
     """ Subscription admin display """
     list_display = ('subreddit', 'count')
+    search_fields = ('subreddit', )
 
 
 class MemberSubscriptionAdmin(admin.ModelAdmin):
     list_display = ('member', 'subscription')
     list_filter = ('member', 'subscription')
+    search_fields = ('subscription', )
 
 
 class MemberSubscriptionInlineAdmin(admin.TabularInline):
