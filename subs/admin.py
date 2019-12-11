@@ -7,5 +7,10 @@ class RedditLinkAdmin(admin.ModelAdmin):
     list_filter = ('subreddit', 'parsed_at')
     ordering = ('-score', )
 
+
+class SubredditAdmin(admin.ModelAdmin):
+    search_fields = ('subreddit', )
+
+
 admin.site.register(RedditLink, RedditLinkAdmin)
-admin.site.register(Subreddit)
+admin.site.register(Subreddit, SubredditAdmin)
