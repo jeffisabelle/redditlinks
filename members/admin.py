@@ -9,6 +9,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
 
 class MemberSubscriptionAdmin(admin.ModelAdmin):
     list_display = ('member', 'subscription')
+    list_filter = ('member', 'subscription')
 
 
 class MemberSubscriptionInlineAdmin(admin.TabularInline):
